@@ -7,19 +7,22 @@
     {
       "name": "veiled_frames",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": ["-d", "chrome"]
     },
     {
       "name": "veiled_frames (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "args": ["-d", "chrome"]
     },
     {
       "name": "veiled_frames (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "args": ["-d", "chrome"]
     }
   ]
 }
