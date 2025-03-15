@@ -4,12 +4,18 @@ class AuthService {
   final SupabaseClient _supabaseClient = Supabase.instance.client;
 
   //sign in
-  Future<void> signIn() async {}
+  Future<void> signIn() async {
+    print("signed in");
+  }
   //sign up
 
-  Future<void> signUp() async {}
+  Future<void> signUp() async {
+    print("signed up");
+  }
 
   //logout
 
-  Future<void> logout() async {}
+  Future<void> logout() async {
+    print("logged out");
+  }
 }
