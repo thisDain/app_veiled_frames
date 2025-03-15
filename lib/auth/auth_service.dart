@@ -6,6 +6,7 @@ class AuthService {
   //sign in
   Future<void> signIn() async {
     print("signed in");
+    final singin = "bro";
   }
   //sign up
 
