@@ -12,8 +12,8 @@ class _HomeState extends State<Home> {
 
   void _scroll(double amount) {
     _scrollController.animateTo(
-      _scrollController.offset + amount,
-      duration: Duration(milliseconds: 300),
+      _scrollController.position.pixels + amount,
+      duration: const Duration(milliseconds: 300),
       curve: Curves.linear,
     );
   }
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF2D142C),
+      backgroundColor: const Color(0xFF2D142C),
       appBar: AppBar(
         toolbarHeight: 75.0,
         backgroundColor: Color(0xFF510A32),
@@ -50,117 +50,148 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildSearchBarRow(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Categories',
-                style: TextStyle(
-                  color: Color(0xFFFFFFE4),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  _buildSearchBarRow(),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Categories',
+                      style: TextStyle(
+                        color: Color(0xFFFFFFE4),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(-100.0),
+                    ),
+                    SizedBox(
+                      height: 78.0,
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      child: _buildCategoryRow(),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(100.0),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ];
+          },
+          body: SingleChildScrollView(
+            child: Column(
               children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(-100.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Recommended',
+                    style: TextStyle(
+                      color: Color(0xFFFFFFE4),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 78.0,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: _buildCategoryRow(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[_buildRecommendedRow()],
                 ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(100.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'New Works',
+                    style: TextStyle(
+                      color: Color(0xFFFFFFE4),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(-100.0),
+                    ),
+                    SizedBox(
+                      height: 78.0,
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      child: _buildCategoryRow(),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(100.0),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Top Artists',
+                    style: TextStyle(
+                      color: Color(0xFFFFFFE4),
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(-100.0),
+                    ),
+                    SizedBox(
+                      height: 78.0,
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      child: _buildCategoryRow(),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xFFEE4540),
+                      ),
+                      onPressed: () => _scroll(100.0),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Recommended',
-                style: TextStyle(
-                  color: Color(0xFFFFFFE4),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'New Works',
-                style: TextStyle(
-                  color: Color(0xFFFFFFE4),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(-100.0),
-                ),
-                SizedBox(
-                  height: 78.0,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: _buildCategoryRow(),
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(100.0),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Top Artists',
-                style: TextStyle(
-                  color: Color(0xFFFFFFE4),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(-100.0),
-                ),
-                SizedBox(
-                  height: 78.0,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: _buildCategoryRow(),
-                ),
-                IconButton(
-                  icon: Icon(Icons.arrow_forward_ios, color: Color(0xFFEE4540)),
-                  onPressed: () => _scroll(100.0),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -289,6 +320,83 @@ class _HomeState extends State<Home> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRecommendedRow() {
+    return Center(
+      child: SizedBox(
+        height: 148.0,
+        width: 354.0,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFFE54A12), Color(0xFF651B00)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(2.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Image.asset("assets/images/logo_main.png", height: 100.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20.0),
+                  Text(
+                    "Fresh from \nthe studio!",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 32.0,
+                      color: Color(0xFFFAFAF0),
+                      fontWeight: FontWeight.w800,
+                      height: 0.90,
+                    ),
+                  ),
+                  Text(
+                    "@artistname's latest mixed media piece. \nDon't miss it!",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 10.0,
+                      color: Color(0xFFFAFAF0),
+                      fontWeight: FontWeight.w300,
+                      height: 1.50,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFF2672E8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 1.0,
+                      ),
+                      side: const BorderSide(
+                        color: Color(0xFF2D142C),
+                        width: 1.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
+                    child: const Text(
+                      "VISIT PROFILE",
+                      style: TextStyle(
+                        color: Color(0xFFFAFAF0),
+                        fontSize: 10.0,
+                        fontWeight: FontWeight.w600,
+                        height: 1.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
