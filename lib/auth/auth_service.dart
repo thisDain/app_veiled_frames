@@ -12,7 +12,7 @@ class AuthService {
 
   Future<void> signUp() async {
     print("signed up");
-    final hello = "strig";
+    final brah = "brahhh";
   }
 
   //logout
