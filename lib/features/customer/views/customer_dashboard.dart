@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:veiled_frames/features/auth/data/auth_service.dart';
+import 'package:veiled_frames/features/auth/views/login.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class CustomerDashboard extends StatefulWidget {
+  const CustomerDashboard({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<CustomerDashboard> createState() => _CustomerDashboardState();
 }
 
-class _HomeState extends State<Home> {
+class _CustomerDashboardState extends State<CustomerDashboard> {
   final ScrollController _scrollController = ScrollController();
 
   void _scroll(double amount) {
@@ -16,6 +18,20 @@ class _HomeState extends State<Home> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.linear,
     );
+  }
+
+  final authService = AuthService();
+
+  void handleLogout() async {
+    final response = await authService.logout();
+    if (response.success) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      }
+    }
   }
 
   @override
@@ -45,7 +61,10 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.menu, color: Color(0xFFFFFFE4), size: 40.0),
-            onPressed: () {},
+            onPressed: () async {
+              //temp logout
+              handleLogout();
+            },
           ),
         ],
       ),
