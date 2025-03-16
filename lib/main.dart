@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:veiled_frames/pages/customer/home/home.dart';
+import 'package:veiled_frames/core/views/splash_screen.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Home(),
+      home: const SplashScreen(),
     );
   }
 }
