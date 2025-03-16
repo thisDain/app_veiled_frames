@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:veiled_frames/core/enums/user_role.dart';
+import 'package:veiled_frames/core/utils/api_response.dart';
 import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/core/utils/password_utils.dart';
 
@@ -9,7 +10,7 @@ class AuthService {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   //sign in
-  Future<void> signIn({
+  Future<ApiResponse> signIn({
     required String email,
     required String password,
     required UserRole role,
@@ -18,49 +19,48 @@ class AuthService {
       final String table =
           role == UserRole.customer ? 'customers' : 'employees';
       final bool isCustomer = role == UserRole.customer;
-      final String userRole = role == UserRole.customer ? "CUSTOMER" : "ARTIST";
+      final String userRole = role == UserRole.customer ? "customer" : "artist";
 
       // Input validation
       if (email.isEmpty || password.isEmpty) {
-        throw Exception("Email and password cannot be empty.");
+        return ApiResponse.failure("Email and password cannot be empty.");
       }
 
       final userData =
           await _supabaseClient
               .from(table)
               .select(
-                '${isCustomer ? "customer_id" : "emp_id"}, ${isCustomer ? "c_password" : "e_password"}',
+                '${isCustomer ? "customer_id" : "emp_id"}, ${isCustomer ? "c_password" : "e_password"}, ${isCustomer ? "c_salt" : "e_salt"}',
               )
               .eq(isCustomer ? 'c_email' : 'e_email', email)
               .maybeSingle();
 
       if (userData == null) {
-        throw Exception("User not found.");
+        return ApiResponse.failure("User not found.");
       }
-
       // verify password
-      final String hashedPassword =
+      final String storedHashedPassword =
           userData[isCustomer ? 'c_password' : 'e_password'];
+      final String storedSalt = userData[isCustomer ? 'c_salt' : 'e_salt'];
 
-      if (!verifyPassword(password, hashedPassword)) {
-        throw Exception("Incorrect password.");
+      if (hashPassword(password, storedSalt) != storedHashedPassword) {
+        return ApiResponse.failure("Incorrect password.");
       }
 
       // Store session securely
       await _storage.write(key: 'user_email', value: email);
       await _storage.write(key: 'user_role', value: userRole);
 
-      logger.i("✅ Login successful as ${isCustomer ? "Customer" : "Employee"}");
+      return ApiResponse.success(null, message: "Login successful!");
 
       // check if user is customer
-    } catch (e, stacktrace) {
-      logger.e("Error signing up: $e", error: e, stackTrace: stacktrace);
-      rethrow;
+    } catch (e) {
+      return ApiResponse.failure("An error occurred while logging in.");
     }
   }
 
   //sign up
-  Future<void> signUp({
+  Future<ApiResponse> signUp({
     required String email,
     required UserRole role,
     required String password,
@@ -68,12 +68,12 @@ class AuthService {
     try {
       final String table =
           role == UserRole.customer ? 'customers' : 'employees';
-      final String userRole = role == UserRole.customer ? "CUSTOMER" : "ARTIST";
+      final String userRole = role == UserRole.customer ? "customer" : "artist";
       final bool isCustomer = role == UserRole.customer;
 
       // Input validation
       if (email.isEmpty || password.isEmpty) {
-        throw Exception("Email and password cannot be empty.");
+        return ApiResponse.failure("Email and password cannot be empty.");
       }
 
       // hash password
@@ -83,25 +83,26 @@ class AuthService {
       final Map<String, dynamic> data = {
         isCustomer ? 'c_email' : 'e_email': email,
         isCustomer ? 'c_password' : 'e_password': hashedPassword,
+        isCustomer ? 'c_salt' : 'e_salt': salt,
         isCustomer ? 'c_role' : 'e_role': userRole,
-        isCustomer ? 'c_created_at' : 'e_hiredate': DateTime.now(),
+        isCustomer ? 'c_created_at' : 'e_hiredate':
+            DateTime.now().toIso8601String(),
       };
 
-      final response = await _supabaseClient.from(table).insert(data);
-
-      if (response.error != null) {
-        throw Exception("Supabase error: ${response.error!.message}");
-      }
+      await _supabaseClient.from(table).insert(data);
 
       logger.i("User successfully created in $table");
 
       await _storage.write(key: 'user_email', value: email);
       await _storage.write(key: 'user_role', value: userRole);
 
-      logger.i("✅ User session stored");
-    } catch (e, stacktrace) {
-      logger.e("Error signing up: $e", error: e, stackTrace: stacktrace);
-      rethrow;
+      return ApiResponse.success("Created user successfully");
+    } catch (e) {
+      logger.e(e);
+      if (e.toString().contains("duplicate key value")) {
+        return ApiResponse.failure("Email is already in use.");
+      }
+      return ApiResponse.failure("An error occurred while creating user.");
     }
   }
 
@@ -119,12 +120,12 @@ class AuthService {
   }
 
   //logout
-  Future<void> logout() async {
+  Future<ApiResponse> logout() async {
     try {
       await _storage.deleteAll();
-      logger.i("✅ User logged out successfully");
+      return ApiResponse.success("User logged out successfully.");
     } catch (e) {
-      logger.e("❌ Error logging out: $e");
+      return ApiResponse.failure("Error logging out.");
     }
   }
 }
