@@ -17,7 +17,18 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: loginBody(), backgroundColor: AppColors.background);
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF510A32), Color(0xFF2D142C)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: loginBody(),
+      ),
+    );
   }
 
   final authService = AuthService();
