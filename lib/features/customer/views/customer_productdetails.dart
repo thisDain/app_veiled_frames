@@ -16,9 +16,7 @@ class _CustomerProductDetailsState extends State<CustomerProductDetails> {
       appBar: AppBar(
         toolbarHeight: 75.0,
         backgroundColor: Color(0xFF510A32),
-        title: Row(children: <Widget>[
-          ],
-        ),
+        title: Row(children: <Widget>[Text("data")]),
         actions: <Widget>[
           IconButton(
             icon: Icon(
