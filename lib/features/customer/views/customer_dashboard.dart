@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
+import 'package:veiled_frames/features/customer/views/customer_cart.dart';
+import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
 
 class CustomerDashboard extends StatefulWidget {
   const CustomerDashboard({super.key});
@@ -287,20 +289,16 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           SizedBox(width: 16.0),
           IconButton(
             icon: Icon(
-              Icons.favorite_border,
-              color: Color(0xFFEE4540),
-              size: 30.0,
-            ),
-            onPressed: () {},
-          ),
-          SizedBox(width: 5.0),
-          IconButton(
-            icon: Icon(
               Icons.shopping_cart_outlined,
               color: Color(0xFFEE4540),
               size: 30.0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CustomerCart()),
+              );
+            },
           ),
         ],
       ),
@@ -537,7 +535,14 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     Align(
                       alignment: Alignment.center,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomerProductDetails(),
+                            ),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: const Color(0xFFFAFAF0),
                           side: const BorderSide(
