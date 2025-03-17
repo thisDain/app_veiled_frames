@@ -66,6 +66,7 @@ flutter:
     - assets/images/
     - assets/images/categories_images/
     - assets/images/recommended/
+    - assets/images/products_images/
 
     # To add assets to your application, add an assets section, like this:
     # assets:

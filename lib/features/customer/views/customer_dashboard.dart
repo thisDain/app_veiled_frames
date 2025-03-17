@@ -89,7 +89,10 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
+          //"SEARCH BAR" Section
           _buildSearchBarRow(),
+
+          //"CATEGORIES" Section
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
@@ -134,6 +137,8 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
               ],
             ),
           ),
+
+          //"RECOMMENDED" Section
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
@@ -151,6 +156,8 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: _buildRecommendedRow(),
           ),
+
+          //"NEW WORKS" Section
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
@@ -164,7 +171,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             ),
           ),
           Container(
-            height: 78.0,
+            height: 150.0,
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             alignment: Alignment.center,
             child: Row(
@@ -195,6 +202,8 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
               ],
             ),
           ),
+
+          //"TOP ARTISTS" Section
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Text(
@@ -208,7 +217,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             ),
           ),
           Container(
-            height: 78.0,
+            height: 150.0,
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             alignment: Alignment.center,
             child: Row(
@@ -463,39 +472,94 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     return ListView.builder(
       controller: _scrollController2,
       scrollDirection: Axis.horizontal,
-      itemCount: 9,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return _buildNewWorksCard(
           _getNewWorksImagePath(index),
           _getNewWorksText(index),
+          _getNewWorksPrice(index),
         );
       },
     );
   }
 
-  Widget _buildNewWorksCard(String imagePath, String text) {
+  Widget _buildNewWorksCard(String imagePath, String text, double price) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 78.0,
-        width: 62.0,
+        height: 150.0,
+        width: 110.0,
         decoration: BoxDecoration(
-          color: Color(0xFFFFFFE4),
+          color: Color(0xFFFAFAF0),
           borderRadius: BorderRadius.circular(2.0),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset(imagePath, height: 41.0),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 10.0,
-                color: Color(0xFFC72C41),
-                fontWeight: FontWeight.w600,
-                height: 0.90,
+            SizedBox(height: 5.0),
+            Image.asset(imagePath, height: 90.0, width: 100.0),
+            SizedBox(height: 2.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      text,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 8.0,
+                        color: Color(0xFF2D142C),
+                        fontWeight: FontWeight.w400,
+                        height: 0.90,
+                      ),
+                    ),
+                    SizedBox(height: 2.0),
+                    Text(
+                      "₱${price.toStringAsFixed(2)}",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 11.0,
+                        color: Color(0xFFC72C41),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Divider(color: Color(0xFF2D142C), height: 0),
+                    SizedBox(height: 2.0),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        backgroundColor: const Color(0xFFFAFAF0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 1.0,
+                        ),
+                        side: const BorderSide(
+                          color: Color(0xFFEE4540),
+                          width: 2.0,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                      child: const Text(
+                        "VIEW ITEM",
+                        style: TextStyle(
+                          color: Color(0xFFEE4540),
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Poppins",
+                          height: 1.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -506,35 +570,37 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
 
   String _getNewWorksImagePath(int index) {
     List<String> imagePaths = [
-      'assets/images/categories_images/oilpaint.png',
-      'assets/images/categories_images/watercolor_mixedmedia.png',
-      'assets/images/categories_images/acrylicpaint.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/gouache_ink.png',
-      'assets/images/categories_images/gouache_ink.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/watercolor_mixedmedia.png',
+      'assets/images/products_images/product_test1.png',
+      'assets/images/products_images/product_test2.png',
+      'assets/images/products_images/product_test3.png',
+      'assets/images/products_images/product_test4.png',
+      'assets/images/products_images/product_test5.png',
     ];
     return imagePaths[index];
   }
 
   String _getNewWorksText(int index) {
-    List<String> categoryTexts = [
-      'Oil Paint',
-      'Water\ncolor',
-      'Acrylic Paint',
-      'Pastels',
-      'Gouache',
-      'Ink',
-      'Graphite',
-      'Charcoal',
-      'Mixed Media',
+    List<String> newWorksTexts = [
+      'Impasto Oil Portrait of Princess Diana',
+      'Impasto Oil Portrait of Princess Diana',
+      'Impasto Oil Portrait of Princess Diana',
+      'Impasto Oil Portrait of Princess Diana',
+      'Impasto Oil Portrait of Princess Diana',
     ];
-    return categoryTexts[index];
+
+    String text = newWorksTexts[index];
+    if (text.length > 30) {
+      return '${text.substring(0, 30)}...';
+    }
+    return newWorksTexts[index];
   }
 
-  //"Top Artists" Row
+  double _getNewWorksPrice(int index) {
+    List<double> newWorksPrice = [100.00, 200.00, 300.00, 400.00, 500.00];
+    return newWorksPrice[index];
+  }
+
+  //"Top Artists" Ro
   Widget _buildTopArtistsRow() {
     return ListView.builder(
       controller: _scrollController3,
@@ -553,10 +619,10 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 78.0,
-        width: 62.0,
+        height: 150.0,
+        width: 110.0,
         decoration: BoxDecoration(
-          color: Color(0xFFFFFFE4),
+          color: Color(0xFFFAFAF0),
           borderRadius: BorderRadius.circular(2.0),
         ),
         child: Column(
@@ -596,7 +662,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
   }
 
   String _getTopArtistText(int index) {
-    List<String> categoryTexts = [
+    List<String> topArtistTexts = [
       'Oil Paint',
       'Water\ncolor',
       'Acrylic Paint',
@@ -607,6 +673,6 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
       'Charcoal',
       'Mixed Media',
     ];
-    return categoryTexts[index];
+    return topArtistTexts[index];
   }
 }
