@@ -171,7 +171,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             ),
           ),
           Container(
-            height: 150.0,
+            height: 160.0,
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             alignment: Alignment.center,
             child: Row(
@@ -487,7 +487,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 150.0,
+        height: 160.0,
         width: 110.0,
         decoration: BoxDecoration(
           color: Color(0xFFFAFAF0),
@@ -497,7 +497,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 5.0),
+            SizedBox(height: 4.0),
             Image.asset(imagePath, height: 90.0, width: 100.0),
             SizedBox(height: 2.0),
             Align(
@@ -515,10 +515,10 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                         fontSize: 8.0,
                         color: Color(0xFF2D142C),
                         fontWeight: FontWeight.w400,
-                        height: 0.90,
+                        height: 1.00,
                       ),
                     ),
-                    SizedBox(height: 2.0),
+                    SizedBox(height: 4.0),
                     Text(
                       "₱${price.toStringAsFixed(2)}",
                       textAlign: TextAlign.left,
@@ -530,31 +530,34 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                       ),
                     ),
                     Divider(color: Color(0xFF2D142C), height: 0),
-                    SizedBox(height: 2.0),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xFFFAFAF0),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0,
-                          vertical: 1.0,
+                    SizedBox(height: 4.0),
+                    Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xFFFAFAF0),
+                          side: const BorderSide(
+                            color: Color(0xFFEE4540),
+                            width: 1.5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 4.0,
+                          ),
+                          minimumSize: const Size(0, 0),
                         ),
-                        side: const BorderSide(
-                          color: Color(0xFFEE4540),
-                          width: 2.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      child: const Text(
-                        "VIEW ITEM",
-                        style: TextStyle(
-                          color: Color(0xFFEE4540),
-                          fontSize: 10.0,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Poppins",
-                          height: 1.0,
+                        child: const Text(
+                          "View Item",
+                          style: TextStyle(
+                            color: Color(0xFFEE4540),
+                            fontSize: 10.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                          ),
                         ),
                       ),
                     ),
@@ -600,12 +603,13 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     return newWorksPrice[index];
   }
 
-  //"Top Artists" Ro
+  //"Top Artists" Row
+
   Widget _buildTopArtistsRow() {
     return ListView.builder(
       controller: _scrollController3,
       scrollDirection: Axis.horizontal,
-      itemCount: 9,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return _buildTopArtistCard(
           _getTopArtistImagePath(index),
@@ -619,7 +623,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 150.0,
+        height: 160.0,
         width: 110.0,
         decoration: BoxDecoration(
           color: Color(0xFFFAFAF0),
@@ -627,17 +631,74 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset(imagePath, height: 41.0),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 10.0,
-                color: Color(0xFFC72C41),
-                fontWeight: FontWeight.w600,
-                height: 0.90,
+            SizedBox(height: 4.0),
+            ClipOval(
+              child: Image.asset(
+                imagePath,
+                height: 80.0,
+                width: 80.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 12.0,
+                          color: Color(0xFF2D142C),
+                          fontWeight: FontWeight.w600,
+                          height: 1.00,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 4.0),
+                    Divider(color: Color(0xFF2D142C), height: 0),
+                    SizedBox(height: 4.0),
+                    Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xFFFAFAF0),
+                          side: const BorderSide(
+                            color: Color(0xFFEE4540),
+                            width: 1.5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 4.0,
+                          ),
+                          minimumSize: const Size(0, 0),
+                        ),
+                        child: const Text(
+                          "View Profile",
+                          style: TextStyle(
+                            color: Color(0xFFEE4540),
+                            fontSize: 10.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -648,31 +709,24 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
 
   String _getTopArtistImagePath(int index) {
     List<String> imagePaths = [
-      'assets/images/categories_images/oilpaint.png',
-      'assets/images/categories_images/watercolor_mixedmedia.png',
-      'assets/images/categories_images/acrylicpaint.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/gouache_ink.png',
-      'assets/images/categories_images/gouache_ink.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/pastels_graphite_charcoal.png',
-      'assets/images/categories_images/watercolor_mixedmedia.png',
+      'assets/images/products_images/product_test1.png',
+      'assets/images/products_images/product_test2.png',
+      'assets/images/products_images/product_test3.png',
+      'assets/images/products_images/product_test4.png',
+      'assets/images/products_images/product_test5.png',
     ];
     return imagePaths[index];
   }
 
   String _getTopArtistText(int index) {
     List<String> topArtistTexts = [
-      'Oil Paint',
-      'Water\ncolor',
-      'Acrylic Paint',
-      'Pastels',
-      'Gouache',
-      'Ink',
-      'Graphite',
-      'Charcoal',
-      'Mixed Media',
+      'Victoria Smith',
+      'Michael Kaiser',
+      'Kaelix Debonair',
+      'Guji Yae',
+      'Sylus Kael',
     ];
+
     return topArtistTexts[index];
   }
 }
