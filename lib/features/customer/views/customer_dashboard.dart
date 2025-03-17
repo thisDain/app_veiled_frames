@@ -323,31 +323,34 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
   }
 
   Widget _buildCategoryCard(String imagePath, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Container(
-        height: 78.0,
-        width: 62.0,
-        decoration: BoxDecoration(
-          color: Color(0xFFFFFFE4),
-          borderRadius: BorderRadius.circular(2.0),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(imagePath, height: 41.0),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 10.0,
-                color: Color(0xFFC72C41),
-                fontWeight: FontWeight.w600,
-                height: 0.90,
+    return GestureDetector(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Container(
+          height: 78.0,
+          width: 62.0,
+          decoration: BoxDecoration(
+            color: Color(0xFFFFFFE4),
+            borderRadius: BorderRadius.circular(2.0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(imagePath, height: 41.0),
+              Text(
+                text,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 10.0,
+                  color: Color(0xFFC72C41),
+                  fontWeight: FontWeight.w600,
+                  height: 0.90,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
