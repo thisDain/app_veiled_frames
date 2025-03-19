@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
+import 'package:veiled_frames/features/customer/views/customer_artistprofile.dart';
 import 'package:veiled_frames/features/customer/views/customer_cart.dart';
 import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
 
@@ -57,10 +59,10 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF2D142C),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         toolbarHeight: 75.0,
-        backgroundColor: Color(0xFF510A32),
+        backgroundColor: AppColors.appBarBackground,
         title: Row(
           children: <Widget>[
             Image.asset('assets/images/logo_main.png', height: 45.0),
@@ -69,7 +71,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
               'VEILED\nFRAMES',
               style: TextStyle(
                 fontFamily: 'Lisu Bosa',
-                color: Color(0xFFFFFFE4),
+                color: AppColors.white,
                 fontSize: 25.0,
                 height: 0.90,
                 fontWeight: FontWeight.w200,
@@ -80,7 +82,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.menu, color: Color(0xFFFFFFE4), size: 40.0),
+            icon: Icon(Icons.menu, color: AppColors.white, size: 40.0),
             onPressed: () async {
               //temp logout
               handleLogout();
@@ -100,7 +102,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             child: Text(
               'Categories',
               style: TextStyle(
-                color: Color(0xFFFFFFE4),
+                color: AppColors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Poppins',
@@ -117,7 +119,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_back_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll1(-100.0),
                 ),
@@ -132,7 +134,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_forward_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll1(100.0),
                 ),
@@ -146,7 +148,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             child: Text(
               'Recommended',
               style: TextStyle(
-                color: Color(0xFFFFFFE4),
+                color: AppColors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Poppins',
@@ -165,7 +167,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             child: Text(
               'New Works',
               style: TextStyle(
-                color: Color(0xFFFFFFE4),
+                color: AppColors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Poppins',
@@ -182,7 +184,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_back_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll2(-100.0),
                 ),
@@ -197,7 +199,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_forward_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll2(100.0),
                 ),
@@ -211,7 +213,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
             child: Text(
               'Top Artists',
               style: TextStyle(
-                color: Color(0xFFFFFFE4),
+                color: AppColors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Poppins',
@@ -228,7 +230,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_back_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll3(-100.0),
                 ),
@@ -243,7 +245,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 IconButton(
                   icon: const Icon(
                     Icons.arrow_forward_ios,
-                    color: Color(0xFFEE4540),
+                    color: AppColors.fieryRed,
                   ),
                   onPressed: () => _scroll3(100.0),
                 ),
@@ -264,7 +266,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFFF5F5F5),
+                color: AppColors.whiteShade,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextField(
@@ -290,7 +292,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           IconButton(
             icon: Icon(
               Icons.shopping_cart_outlined,
-              color: Color(0xFFEE4540),
+              color: AppColors.fieryRed,
               size: 30.0,
             ),
             onPressed: () {
@@ -329,7 +331,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           height: 78.0,
           width: 62.0,
           decoration: BoxDecoration(
-            color: Color(0xFFFFFFE4),
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(2.0),
           ),
           child: Column(
@@ -342,7 +344,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 style: TextStyle(
                   fontFamily: "Poppins",
                   fontSize: 10.0,
-                  color: Color(0xFFC72C41),
+                  color: AppColors.secondary,
                   fontWeight: FontWeight.w600,
                   height: 0.90,
                 ),
@@ -417,7 +419,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 32.0,
-                      color: Color(0xFFFAFAF0),
+                      color: AppColors.whiteShade,
                       fontWeight: FontWeight.w800,
                       height: 0.90,
                     ),
@@ -427,13 +429,20 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 10.0,
-                      color: Color(0xFFFAFAF0),
+                      color: AppColors.whiteShade,
                       fontWeight: FontWeight.w300,
                       height: 1.50,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CustomerArtistprofile(),
+                        ),
+                      );
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xFF2672E8),
                       padding: const EdgeInsets.symmetric(
@@ -441,7 +450,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                         vertical: 1.0,
                       ),
                       side: const BorderSide(
-                        color: Color(0xFF2D142C),
+                        color: AppColors.background,
                         width: 1.0,
                       ),
                       shape: RoundedRectangleBorder(
@@ -451,7 +460,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     child: const Text(
                       "VISIT PROFILE",
                       style: TextStyle(
-                        color: Color(0xFFFAFAF0),
+                        color: AppColors.whiteShade,
                         fontSize: 10.0,
                         fontWeight: FontWeight.w600,
                         fontFamily: "Poppins",
@@ -491,7 +500,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
         height: 160.0,
         width: 110.0,
         decoration: BoxDecoration(
-          color: Color(0xFFFAFAF0),
+          color: AppColors.whiteShade,
           borderRadius: BorderRadius.circular(2.0),
         ),
         child: Column(
@@ -514,7 +523,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                       style: TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 8.0,
-                        color: Color(0xFF2D142C),
+                        color: AppColors.background,
                         fontWeight: FontWeight.w400,
                         height: 1.00,
                       ),
@@ -526,11 +535,11 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                       style: TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 11.0,
-                        color: Color(0xFFC72C41),
+                        color: AppColors.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Divider(color: Color(0xFF2D142C), height: 0),
+                    Divider(color: AppColors.background, height: 0),
                     SizedBox(height: 4.0),
                     Align(
                       alignment: Alignment.center,
@@ -561,7 +570,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                         child: const Text(
                           "View Item",
                           style: TextStyle(
-                            color: Color(0xFFEE4540),
+                            color: AppColors.fieryRed,
                             fontSize: 10.0,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Poppins",
@@ -634,7 +643,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
         height: 160.0,
         width: 110.0,
         decoration: BoxDecoration(
-          color: Color(0xFFFAFAF0),
+          color: AppColors.whiteShade,
           borderRadius: BorderRadius.circular(2.0),
         ),
         child: Column(
@@ -666,23 +675,23 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                         style: TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 12.0,
-                          color: Color(0xFF2D142C),
+                          color: AppColors.background,
                           fontWeight: FontWeight.w600,
                           height: 1.00,
                         ),
                       ),
                     ),
                     SizedBox(height: 4.0),
-                    Divider(color: Color(0xFF2D142C), height: 0),
+                    Divider(color: AppColors.background, height: 0),
                     SizedBox(height: 4.0),
                     Align(
                       alignment: Alignment.center,
                       child: TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xFFFAFAF0),
+                          backgroundColor: AppColors.whiteShade,
                           side: const BorderSide(
-                            color: Color(0xFFEE4540),
+                            color: AppColors.fieryRed,
                             width: 1.5,
                           ),
                           shape: RoundedRectangleBorder(
@@ -697,7 +706,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                         child: const Text(
                           "View Profile",
                           style: TextStyle(
-                            color: Color(0xFFEE4540),
+                            color: AppColors.fieryRed,
                             fontSize: 10.0,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Poppins",
