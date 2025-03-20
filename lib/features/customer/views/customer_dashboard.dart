@@ -99,13 +99,16 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
           //"CATEGORIES" Section
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(
-              'Categories',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Poppins',
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Categories',
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Poppins',
+                ),
               ),
             ),
           ),
