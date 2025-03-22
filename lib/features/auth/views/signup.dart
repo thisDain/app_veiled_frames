@@ -88,77 +88,79 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget loginBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              logoPath,
-              width: 68, // Adjust width as needed
-              height: 68, // Adjust height as needed
-              fit: BoxFit.contain,
-            ),
-            Text(
-              "VEILED\nFRAMES",
-              style: TextStyle(
-                fontFamily: "Lisu Bosa",
-                fontWeight: FontWeight.w500,
-                fontSize: 32.0,
-                color: AppColors.white,
-                height: 0.9,
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.all(50.0),
-          child: Text(
-            "Welcome",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.fieryRed,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w600,
-              fontSize: 32,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 50.0),
-          child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Create an Account",
-                  style: TextStyle(
-                    color: AppColors.whiteShade,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w400,
-                    fontSize: 24.0,
-                  ),
-                ),
+              Image.asset(
+                logoPath,
+                width: 68, // Adjust width as needed
+                height: 68, // Adjust height as needed
+                fit: BoxFit.contain,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Please provide the following details for your new account",
-                  style: TextStyle(
-                    color: AppColors.whiteShade.withOpacity(0.5),
-                    fontFamily: "Poppins",
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 12.0,
-                  ),
+              Text(
+                "VEILED\nFRAMES",
+                style: TextStyle(
+                  fontFamily: "Lisu Bosa",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 32.0,
+                  color: AppColors.white,
+                  height: 0.9,
                 ),
               ),
             ],
           ),
-        ),
-        loginForm(),
-      ],
+          Padding(
+            padding: EdgeInsets.all(50.0),
+            child: Text(
+              "Welcome",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.fieryRed,
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.w600,
+                fontSize: 32,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Create an Account",
+                    style: TextStyle(
+                      color: AppColors.whiteShade,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Please provide the following details for your new account",
+                    style: TextStyle(
+                      color: AppColors.whiteShade.withOpacity(0.5),
+                      fontFamily: "Poppins",
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          loginForm(),
+        ],
+      ),
     );
   }
 
