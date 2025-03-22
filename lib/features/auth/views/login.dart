@@ -6,6 +6,7 @@ import 'package:veiled_frames/core/enums/user_role.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/signup.dart';
 import 'package:veiled_frames/features/customer/views/customer_dashboard.dart';
+import 'package:veiled_frames/features/employee/views/employee_dashboard.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -64,11 +65,10 @@ class _LoginState extends State<Login> {
               MaterialPageRoute(builder: (context) => CustomerDashboard()),
             );
           } else {
-            // NAVIGATE TO ARTIST VIEW
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => CustomerDashboard()), //REPLACE TO ARTISTVIEW
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ArtistDashboard()),
+            );
           }
         }
       } else {
