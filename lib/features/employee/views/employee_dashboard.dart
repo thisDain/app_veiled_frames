@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
+import 'package:veiled_frames/features/widgets/global_appbar.dart';
+import 'package:veiled_frames/features/widgets/rightside_menu.dart';
 
 class ArtistDashboard extends StatefulWidget {
   const ArtistDashboard({super.key});
@@ -40,36 +42,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 75.0,
-        backgroundColor: AppColors.appBarBackground,
-        title: Row(
-          children: <Widget>[
-            Image.asset('assets/images/logo_main.png', height: 45.0),
-            SizedBox(width: 10),
-            Text(
-              'VEILED\nFRAMES',
-              style: TextStyle(
-                fontFamily: 'Lisu Bosa',
-                color: AppColors.white,
-                fontSize: 25.0,
-                height: 0.90,
-                fontWeight: FontWeight.w200,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu, color: AppColors.white, size: 40.0),
-            onPressed: () async {
-              //temp logout
-              handleLogout();
-            },
-          ),
-        ],
-      ),
+      appBar: GlobalAppbar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

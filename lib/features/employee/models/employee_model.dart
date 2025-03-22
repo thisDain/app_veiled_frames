@@ -4,7 +4,7 @@ import 'package:veiled_frames/features/auth/models/user_model.dart';
 class EmployeeModel extends UserModel {
   EmployeeModel({
     required int super.id,
-    required int super.officeId,
+    super.officeId,
     required super.firstName,
     required super.lastName,
     required super.email,

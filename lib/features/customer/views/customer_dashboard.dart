@@ -3,6 +3,7 @@ import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/customer/views/customer_artistprofile.dart';
 import 'package:veiled_frames/features/customer/views/customer_cart.dart';
 import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
+import 'package:veiled_frames/features/widgets/global_appbar.dart';
 import 'package:veiled_frames/features/widgets/rightside_menu.dart';
 
 class CustomerDashboard extends StatefulWidget {
@@ -41,47 +42,11 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     );
   }
 
-  void _openMenu(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true, // Close on tap outside
-      builder: (context) {
-        return RightSideMenu();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        toolbarHeight: 75.0,
-        backgroundColor: AppColors.appBarBackground,
-        title: Row(
-          children: <Widget>[
-            Image.asset('assets/images/logo_main.png', height: 45.0),
-            SizedBox(width: 10),
-            Text(
-              'VEILED\nFRAMES',
-              style: TextStyle(
-                fontFamily: 'Lisu Bosa',
-                color: AppColors.white,
-                fontSize: 25.0,
-                height: 0.90,
-                fontWeight: FontWeight.w200,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu, color: AppColors.white, size: 40.0),
-            onPressed: () => _openMenu(context),
-          ),
-        ],
-      ),
+      appBar: GlobalAppbar(),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
