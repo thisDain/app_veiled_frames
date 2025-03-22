@@ -164,6 +164,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                         color: AppColors.white,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 16.0,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                     Text.rich(
@@ -176,6 +177,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   .withOpacity(0.5),
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                           TextSpan(
@@ -185,6 +187,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   AppColors.white, // No opacity
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
@@ -200,6 +203,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   .withOpacity(0.5),
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                           TextSpan(
@@ -209,6 +213,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   AppColors.white, // No opacity
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
@@ -224,6 +229,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   .withOpacity(0.5),
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                           TextSpan(
@@ -234,6 +240,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   AppColors.white, // No opacity
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
@@ -249,6 +256,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   .withOpacity(0.5),
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                           TextSpan(
@@ -259,6 +267,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                                   AppColors.white, // No opacity
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
@@ -284,6 +293,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                         color: AppColors.white,
                                         fontSize: 24,
                                         fontWeight: FontWeight.w300,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   ],

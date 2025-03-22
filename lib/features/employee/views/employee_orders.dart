@@ -157,6 +157,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                         final order = orders[index];
                         return Container(
                           height: 120,
+                          width: double.infinity,
                           margin: EdgeInsets.only(bottom: 8, right: 30),
                           decoration: BoxDecoration(
                             color: Color(0xFF2D142C),
@@ -174,12 +175,18 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      "Order No.: ${order['order_no']}",
-                                      style: TextStyle(
-                                        color: AppColors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                                    // Use Flexible to prevent overflow
+                                    Flexible(
+                                      child: Text(
+                                        "Order No.: ${order['order_no']}",
+                                        style: TextStyle(
+                                          color: AppColors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        overflow:
+                                            TextOverflow
+                                                .ellipsis, // Prevent text overflow
                                       ),
                                     ),
                                     Spacer(),
@@ -196,9 +203,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                           shape: WidgetStateProperty.all(
                                             RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                    3,
-                                                  ), // Makes it a perfect square
+                                                  BorderRadius.circular(3),
                                             ),
                                           ),
                                           padding: WidgetStateProperty.all(
@@ -206,7 +211,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                               vertical: 3,
                                               horizontal: 2,
                                             ),
-                                          ), // Optional: Ensures no extra padding
+                                          ),
                                         ),
                                         child: Text(
                                           "View Details",
@@ -222,60 +227,62 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                 ),
                                 Divider(color: AppColors.crimsonWine),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start, // Align columns at the top
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // First column
                                     Expanded(
-                                      // Ensures both columns start at the left
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .start, // Align text to the left
+                                            CrossAxisAlignment.start,
                                         children: [
                                           IconText(
                                             icon: Icons.person,
                                             text: order['customer_name'],
                                             size: 16,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.attach_money,
                                             text:
                                                 "Payable: ${order['payable']}",
                                             size: 16,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.calendar_month,
                                             text:
                                                 "Order on: ${order['order_date']}",
                                             size: 16,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
                                       ),
                                     ),
+                                    // Second column
                                     Expanded(
-                                      // Ensures the right column also starts at the left
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .start, // Align text to the left
+                                            CrossAxisAlignment.start,
                                         children: [
                                           IconText(
                                             icon: Icons.phone,
                                             text: order['contact'],
                                             size: 16,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.location_pin,
                                             text: order['location'],
                                             size: 16,
+                                            overflow:
+                                                TextOverflow
+                                                    .ellipsis, // Prevents text overflow
                                           ),
                                           IconText(
                                             icon: Icons.delivery_dining,
                                             text: order['delivery_type'],
                                             size: 16,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
                                       ),

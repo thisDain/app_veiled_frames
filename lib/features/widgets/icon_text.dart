@@ -5,6 +5,7 @@ class IconText extends StatelessWidget {
   final String text;
   final Color color;
   final double size;
+  final TextOverflow overflow;
 
   const IconText({
     super.key,
@@ -12,6 +13,7 @@ class IconText extends StatelessWidget {
     required this.text,
     this.color = Colors.white,
     this.size = 16,
+    required this.overflow,
   });
 
   @override
