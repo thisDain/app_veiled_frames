@@ -20,19 +20,17 @@ class _CustomerArtistprofileState extends State<CustomerArtistprofile> {
         toolbarHeight: 75.0,
         backgroundColor: Color(0xFF510A32),
         iconTheme: IconThemeData(color: AppColors.fieryRed),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Veiled Frames Artist",
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 20.0,
-                fontWeight: FontWeight.w500,
-                color: AppColors.white,
-              ),
+        title: Align(
+          alignment: Alignment.center,
+          child: Text(
+            "Veiled Frames Artist",
+            style: TextStyle(
+              fontFamily: "Poppins",
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              color: AppColors.white,
             ),
-          ],
+          ),
         ),
       ),
       body: ListView(

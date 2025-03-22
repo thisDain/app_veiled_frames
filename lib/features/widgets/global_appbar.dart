@@ -28,6 +28,7 @@ class _GlobalAppbarState extends State<GlobalAppbar> {
     return AppBar(
       toolbarHeight: 75.0,
       backgroundColor: AppColors.appBarBackground,
+      iconTheme: IconThemeData(color: AppColors.fieryRed),
       title: Row(
         children: <Widget>[
           Image.asset('assets/images/logo_main.png', height: 45.0),

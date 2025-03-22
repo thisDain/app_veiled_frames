@@ -4,6 +4,7 @@ import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/models/user_model.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
+import 'package:veiled_frames/features/widgets/user_edit_profile.dart';
 
 import '../../core/utils/api_response.dart';
 
@@ -161,8 +162,12 @@ class _RightSideMenuState extends State<RightSideMenu>
                     ), // Add padding
                     child: GestureDetector(
                       onTap: () {
-                        // Handle button tap
-                        print("Edit Profile button tapped");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserEditProfile(),
+                          ),
+                        );
                       },
                       child: Container(
                         width:

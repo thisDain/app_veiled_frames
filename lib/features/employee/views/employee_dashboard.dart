@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
+import 'package:veiled_frames/features/employee/views/employee_orders.dart';
+import 'package:veiled_frames/features/employee/views/employee_products.dart';
 import 'package:veiled_frames/features/widgets/global_appbar.dart';
 import 'package:veiled_frames/features/widgets/rightside_menu.dart';
 
@@ -17,72 +19,33 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
   String revenueChange = '0%';
   int totalOrders = 0;
   int totalProducts = 0;
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  final authService = AuthService();
-
-  void handleLogout() async {
-    final response = await authService.logout();
-    if (response.success) {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Login()),
-        );
-      }
-    }
-  }
+  final ScrollController _scrollController =
+      ScrollController(); // Create controller
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalAppbar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Dashboard',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFEE4540),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Dashboard',
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFEE4540),
               ),
-              SizedBox(height: 16),
-              _revenueCard(totalRevenue, revenueChange),
-              SizedBox(height: 16),
-              _ordersAndProductsRow(totalOrders, totalProducts),
-              SizedBox(height: 16),
-              _bestSellingProductsCard(),
-            ],
-          ),
+            ),
+            SizedBox(height: 16),
+            _revenueCard(totalRevenue, revenueChange),
+            SizedBox(height: 16),
+            _ordersAndProductsRow(totalOrders, totalProducts),
+            SizedBox(height: 16),
+            Expanded(child: _bestSellingProductsCard()),
+          ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.inventory),
-            label: 'Products',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
-            label: 'Orders',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFFEE4540),
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
       ),
     );
   }
@@ -198,6 +161,25 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
   }
 
   Widget _bestSellingProductsCard() {
+    // Example data for the product rows
+    final List<Map<String, String>> products = [
+      {'name': 'The Sunflower', 'orders': '17', 'sales': '15'},
+      {'name': 'The Rose', 'orders': '12', 'sales': '10'},
+      {'name': 'The Tulip', 'orders': '8', 'sales': '7'},
+      {'name': 'The Daisy', 'orders': '6', 'sales': '5'},
+      {'name': 'The Lily', 'orders': '5', 'sales': '4'},
+      {'name': 'The Orchid', 'orders': '4', 'sales': '3'},
+      {'name': 'The Carnation', 'orders': '3', 'sales': '2'},
+      {'name': 'The Iris', 'orders': '2', 'sales': '1'},
+      {'name': 'The Peony', 'orders': '1', 'sales': '1'},
+      {'name': 'The Hydrangea', 'orders': '1', 'sales': '1'},
+      {'name': 'The Lavender', 'orders': '1', 'sales': '1'},
+      {'name': 'The Marigold', 'orders': '1', 'sales': '1'},
+      {'name': 'The Poppy', 'orders': '1', 'sales': '1'},
+      {'name': 'The Snapdragon', 'orders': '1', 'sales': '1'},
+      {'name': 'The Zinnia', 'orders': '1', 'sales': '1'},
+    ];
+
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -249,7 +231,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
           ),
           SizedBox(height: 16),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
             child: Row(
               children: [
                 Expanded(
@@ -304,71 +286,125 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
             ),
           ),
           SizedBox(height: 8),
-          Container(
-            decoration: BoxDecoration(
-              color: Color(0xFF2D142C),
-              borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(10),
-                left: Radius.circular(10),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      '1',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFC0B8AD),
-                        fontFamily: 'Poppins',
+          // Use ListView for the product rows
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      width: 12, // Width of the scrollbar background
+                      decoration: BoxDecoration(
+                        color:
+                            AppColors.rosewoodMauve, // Track background color
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ), // Adjust for rounded edges
                       ),
-                      textAlign: TextAlign.start,
                     ),
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      'The Sunflower',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFFAFAF0),
-                        fontFamily: 'Poppins',
+                ),
+                Scrollbar(
+                  thickness: 8, // Scrollbar thickness
+                  radius: const Radius.circular(10), // Rounded corners
+                  thumbVisibility: true, // Always visible
+                  interactive: true, // Draggable
+                  trackVisibility: true,
+                  scrollbarOrientation: ScrollbarOrientation.right,
+                  controller: _scrollController,
+                  child: Theme(
+                    data: ThemeData(
+                      scrollbarTheme: ScrollbarThemeData(
+                        thumbColor: WidgetStateProperty.all(
+                          AppColors.dustyBlush,
+                        ), // Change color here
+                        trackColor: WidgetStateProperty.all(
+                          AppColors.dustyBlush,
+                        ), // Track color
+                        trackVisibility: WidgetStateProperty.all(true),
                       ),
-                      textAlign: TextAlign.start,
+                    ),
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 8, right: 30),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF2D142C),
+                            borderRadius: BorderRadius.horizontal(
+                              right: Radius.circular(10),
+                              left: Radius.circular(10),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 8.0,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFC0B8AD),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    product['name']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFFAFAF0),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    product['orders']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFEE4540),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    product['sales']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFEE4540),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      '17',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFEE4540),
-                        fontFamily: 'Poppins',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Text(
-                      '15',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFEE4540),
-                        fontFamily: 'Poppins',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
