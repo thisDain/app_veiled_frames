@@ -73,8 +73,6 @@ class _RightSideMenuState extends State<RightSideMenu>
         isLoading = false;
       });
     }
-
-    logger.i(userData);
   }
 
   void handleLogout() async {

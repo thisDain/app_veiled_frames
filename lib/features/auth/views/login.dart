@@ -7,6 +7,7 @@ import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/signup.dart';
 import 'package:veiled_frames/features/customer/views/customer_dashboard.dart';
 import 'package:veiled_frames/features/employee/views/employee_dashboard.dart';
+import 'package:veiled_frames/features/employee/views/employee_main.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -67,7 +68,7 @@ class _LoginState extends State<Login> {
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ArtistDashboard()),
+              MaterialPageRoute(builder: (context) => ArtistMain()),
             );
           }
         }
