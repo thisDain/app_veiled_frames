@@ -1,36 +1,22 @@
 import 'package:veiled_frames/core/enums/user_role.dart';
+import 'package:veiled_frames/features/auth/models/user_model.dart';
 
-class EmployeeModel {
-  final int id;
-  final int officeId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phoneNumber;
-  final String address;
-  final String city;
-  final String stateProvince;
-  final String country;
-  final String postalCode;
-  final String image;
-  final UserRole role;
-  final DateTime hireDate;
-
+class EmployeeModel extends UserModel {
   EmployeeModel({
-    required this.id,
-    required this.officeId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phoneNumber,
-    required this.address,
-    required this.city,
-    required this.stateProvince,
-    required this.country,
-    required this.postalCode,
-    required this.image,
-    required this.role,
-    required this.hireDate,
+    required int super.id,
+    required int super.officeId,
+    required super.firstName,
+    required super.lastName,
+    required super.email,
+    super.phoneNumber,
+    super.address,
+    super.city,
+    super.stateProvince,
+    super.country,
+    super.postalCode,
+    super.image,
+    required super.role,
+    required super.createdAt,
   });
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) {
@@ -47,27 +33,10 @@ class EmployeeModel {
       country: json['e_country'],
       postalCode: json['e_postalcode'],
       image: json['e_image'],
-      role: UserRole.values[json['e_role']],
-      hireDate: DateTime.parse(json['e_hiredate']),
+      role: UserRole.values.firstWhere(
+        (e) => e.toString() == 'UserRole.${json['e_role']}',
+      ),
+      createdAt: DateTime.parse(json['e_hiredate']),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'emp_id': id,
-      'office_id': officeId,
-      'e_fname': firstName,
-      'e_lname': lastName,
-      'e_email': email,
-      'e_phone': phoneNumber,
-      'e_address': address,
-      'e_city': city,
-      'e_state_province': stateProvince,
-      'e_country': country,
-      'e_postalcode': postalCode,
-      'e_image': image,
-      'e_role': role.index,
-      'e_hiredate': hireDate.toIso8601String(),
-    };
   }
 }

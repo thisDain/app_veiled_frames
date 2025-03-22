@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
-import 'package:veiled_frames/features/auth/data/auth_service.dart';
-import 'package:veiled_frames/features/auth/views/login.dart';
 import 'package:veiled_frames/features/customer/views/customer_artistprofile.dart';
 import 'package:veiled_frames/features/customer/views/customer_cart.dart';
 import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
+import 'package:veiled_frames/features/widgets/rightside_menu.dart';
 
 class CustomerDashboard extends StatefulWidget {
   const CustomerDashboard({super.key});
@@ -42,18 +41,14 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     );
   }
 
-  final authService = AuthService();
-
-  void handleLogout() async {
-    final response = await authService.logout();
-    if (response.success) {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Login()),
-        );
-      }
-    }
+  void _openMenu(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // Close on tap outside
+      builder: (context) {
+        return RightSideMenu();
+      },
+    );
   }
 
   @override
@@ -83,10 +78,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.menu, color: AppColors.white, size: 40.0),
-            onPressed: () async {
-              //temp logout
-              handleLogout();
-            },
+            onPressed: () => _openMenu(context),
           ),
         ],
       ),

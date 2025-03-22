@@ -6,7 +6,6 @@ import 'package:veiled_frames/core/views/splash_screen.dart';
 
 Future<void> main() async {
   await dotenv.load();
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: "Poppins",
       ),
       home: const SplashScreen(),
     );

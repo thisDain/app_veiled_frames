@@ -4,6 +4,8 @@ import 'package:veiled_frames/core/enums/user_role.dart';
 import 'package:veiled_frames/core/utils/api_response.dart';
 import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/core/utils/password_utils.dart';
+import 'package:veiled_frames/features/customer/models/customer_model.dart';
+import 'package:veiled_frames/features/employee/models/employee_model.dart';
 
 class AuthService {
   final SupabaseClient _supabaseClient = Supabase.instance.client;
@@ -121,6 +123,44 @@ class AuthService {
     String? email = await _storage.read(key: 'user_email');
     String? role = await _storage.read(key: 'user_role');
     return {'email': email, 'role': role};
+  }
+
+  // Get user on db
+  Future<ApiResponse> getUserByEmail({
+    required String email,
+    required String role,
+  }) async {
+    // Input validation
+    if (email.isEmpty || role.isEmpty) {
+      return ApiResponse.failure("Email and Role cannot be empty.");
+    }
+
+    final bool isCustomer = role == UserRole.customer.name;
+    final String table = isCustomer ? 'customers' : 'employees';
+    final String emailField = isCustomer ? 'c_email' : 'e_email';
+
+    try {
+      final response =
+          await _supabaseClient
+              .from(table)
+              .select()
+              .eq(emailField, email)
+              .maybeSingle(); // ✅ Prevent crash if user doesn't exist
+
+      if (response == null) {
+        return ApiResponse.failure("User not found");
+      }
+
+      final user =
+          isCustomer
+              ? CustomerModel.fromJson(response)
+              : EmployeeModel.fromJson(response);
+
+      return ApiResponse.success(user);
+    } catch (error) {
+      logger.e('Error fetching user: $error'); // Debug
+      return ApiResponse.failure("Error fetching user: $error");
+    }
   }
 
   //logout
