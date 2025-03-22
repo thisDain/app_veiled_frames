@@ -27,6 +27,7 @@ class IconText extends StatelessWidget {
           style: TextStyle(
             color: color,
             fontSize: size * 0.8, // Adjust font size relative to icon size
+            overflow: overflow,
           ),
         ),
       ],
