@@ -156,8 +156,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                       itemBuilder: (context, index) {
                         final order = orders[index];
                         return Container(
-                          height: 120,
-                          width: double.infinity,
+                          height: 100,
                           margin: EdgeInsets.only(bottom: 8, right: 30),
                           decoration: BoxDecoration(
                             color: Color(0xFF2D142C),
@@ -238,21 +237,21 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                           IconText(
                                             icon: Icons.person,
                                             text: order['customer_name'],
-                                            size: 16,
+                                            size: 10,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.attach_money,
                                             text:
                                                 "Payable: ${order['payable']}",
-                                            size: 16,
+                                            size: 10,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.calendar_month,
                                             text:
                                                 "Order on: ${order['order_date']}",
-                                            size: 16,
+                                            size: 10,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
@@ -267,13 +266,13 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                           IconText(
                                             icon: Icons.phone,
                                             text: order['contact'],
-                                            size: 16,
+                                            size: 10,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.location_pin,
                                             text: order['location'],
-                                            size: 16,
+                                            size: 10,
                                             overflow:
                                                 TextOverflow
                                                     .ellipsis, // Prevents text overflow
@@ -281,7 +280,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                           IconText(
                                             icon: Icons.delivery_dining,
                                             text: order['delivery_type'],
-                                            size: 16,
+                                            size: 10,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
