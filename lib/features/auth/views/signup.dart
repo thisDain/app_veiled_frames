@@ -35,22 +35,29 @@ class _SignUpState extends State<SignUp> {
   final String logoPath = "assets/images/logo_main.png";
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   UserRole selectedRole = UserRole.customer;
   bool _obscureText = true;
 
   void handleSignUp() async {
     final String email = _emailController.text;
     final String password = _passwordController.text;
+    final String firstName = _firstNameController.text;
+    final String lastName = _lastNameController.text;
 
     try {
       final response = await authService.signUp(
         email: email,
         password: password,
+        firstName: firstName,
+        lastName: lastName,
         role: selectedRole,
       );
 
       if (response.success) {
         if (mounted) {
+          Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(response.message),
@@ -160,6 +167,84 @@ class _SignUpState extends State<SignUp> {
       padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
       child: Column(
         children: [
+          TextField(
+            controller: _firstNameController,
+            decoration: InputDecoration(
+              labelText: 'First Name',
+              labelStyle: TextStyle(
+                color: AppColors.white.withOpacity(0.2),
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              floatingLabelStyle: TextStyle(
+                color: AppColors.white, // Fully visible when focused
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.whiteShade, width: 1.0),
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ), // Less rounded, more like a soft rectangle
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.whiteShade, width: 1.0),
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ), // Same rounded corners when focused
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 18.0,
+                horizontal: 14.0,
+              ), // Spacing inside the field
+            ),
+            style: TextStyle(
+              color: AppColors.white,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w400,
+            ),
+            keyboardType: TextInputType.text,
+          ),
+          SizedBox(height: 16.0),
+          TextField(
+            controller: _lastNameController,
+            decoration: InputDecoration(
+              labelText: 'Last Name',
+              labelStyle: TextStyle(
+                color: AppColors.white.withOpacity(0.2),
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              floatingLabelStyle: TextStyle(
+                color: AppColors.white, // Fully visible when focused
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.whiteShade, width: 1.0),
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ), // Less rounded, more like a soft rectangle
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.whiteShade, width: 1.0),
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ), // Same rounded corners when focused
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 18.0,
+                horizontal: 14.0,
+              ), // Spacing inside the field
+            ),
+            style: TextStyle(
+              color: AppColors.white,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w400,
+            ),
+            keyboardType: TextInputType.text,
+          ),
+          SizedBox(height: 16.0),
           TextField(
             controller: _emailController,
             decoration: InputDecoration(

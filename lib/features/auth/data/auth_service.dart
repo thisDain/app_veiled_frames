@@ -64,6 +64,8 @@ class AuthService {
     required String email,
     required UserRole role,
     required String password,
+    required String firstName,
+    required String lastName,
   }) async {
     try {
       final String table =
@@ -83,6 +85,8 @@ class AuthService {
       final Map<String, dynamic> data = {
         isCustomer ? 'c_email' : 'e_email': email,
         isCustomer ? 'c_password' : 'e_password': hashedPassword,
+        isCustomer ? 'c_fname' : 'e_fname': firstName,
+        isCustomer ? 'c_lname' : 'e_lname': lastName,
         isCustomer ? 'c_salt' : 'e_salt': salt,
         isCustomer ? 'c_role' : 'e_role': userRole,
         isCustomer ? 'c_created_at' : 'e_hiredate':
