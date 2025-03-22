@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/enums/user_role.dart';
-import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
 import 'package:veiled_frames/features/customer/views/customer_dashboard.dart';
-import 'package:veiled_frames/features/employee/views/employee_dashboard.dart';
+import 'package:veiled_frames/features/employee/views/employee_main.dart';
 
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
@@ -28,7 +27,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
     if (role == UserRole.customer.name) {
       return CustomerDashboard();
     } else if (role == UserRole.artist.name) {
-      return ArtistDashboard();
+      return ArtistMain();
     } else {
       return Login();
     }
