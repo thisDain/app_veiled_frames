@@ -12,15 +12,33 @@ class CustomerCart extends StatefulWidget {
 class _CustomerCartState extends State<CustomerCart> {
   List<Map<String, dynamic>> products = [
     {
+      'artistName': 'Viktoria Smith',
+      'artistEmail': 'victoriasmith@gmail.com',
+      'artistProfile': 'assets/profile1.png',
       'name': 'Original Painting - Under Verdant Shadows',
       'quantity': 1,
-      'price': 1000.00,
+      'price': 10000.00,
     },
-    {'name': 'Abstract Art - Crimson Echoes', 'quantity': 2, 'price': 1500.00},
+    {
+      'artistName': 'Viktoria Smith',
+      'artistEmail': 'victoriasmith@gmail.com',
+      'artistProfile': 'assets/profile1.png',
+      'name': 'Study of Sleep and Color 11.8" × 15.7" Oil Paint',
+      'quantity': 1,
+      'price': 12785.00,
+    },
+    {
+      'artistName': 'John Doe',
+      'artistEmail': 'victoriasmith@gmail.com',
+      'artistProfile': 'assets/profile2.png',
+      'name': 'Abstract Art - Crimson Echoes',
+      'quantity': 2,
+      'price': 1500.00,
+    },
   ];
 
-  // Track checkbox selection per item
   late List<bool> isCheckedList;
+  bool isAllSelected = false;
 
   @override
   void initState() {
@@ -28,8 +46,22 @@ class _CustomerCartState extends State<CustomerCart> {
     isCheckedList = List<bool>.filled(products.length, false);
   }
 
+  Map<String, List<Map<String, dynamic>>> groupByArtist() {
+    Map<String, List<Map<String, dynamic>>> grouped = {};
+    for (var product in products) {
+      String artist = product['artistName'];
+      if (!grouped.containsKey(artist)) {
+        grouped[artist] = [];
+      }
+      grouped[artist]!.add(product);
+    }
+    return grouped;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var groupedProducts = groupByArtist();
+
     return Scaffold(
       backgroundColor: const Color(0xFF2D142C),
       appBar: AppBar(
@@ -47,74 +79,86 @@ class _CustomerCartState extends State<CustomerCart> {
         ),
         centerTitle: true,
       ),
-      body: _buildItemRow(),
-      bottomNavigationBar: BottomAppBar(
-        color: AppColors.appBarBackground,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CustomerCheckout()),
-                  );
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.fieryRed,
-                  side: const BorderSide(color: AppColors.fieryRed, width: 1.5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.separated(
+          itemCount: groupedProducts.entries.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+          itemBuilder: (context, index) {
+            var entry = groupedProducts.entries.elementAt(index);
+            return Container(
+              decoration: BoxDecoration(
+                color: AppColors.whiteShade,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildArtistHeader(
+                    entry.key,
+                    entry.value.first['artistProfile'],
+                    entry.value.first['artistEmail'],
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 20.0,
-                  ),
-                ),
-                child: const Text(
-                  "Check out",
-                  style: TextStyle(
-                    color: AppColors.whiteShade,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Poppins",
-                  ),
+                  ...entry.value
+                      .map((product) => _buildCartItemCard(product))
+                      .toList(),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+      bottomNavigationBar: _buildBottomAppBar(),
+    );
+  }
+
+  Widget _buildArtistHeader(
+    String artistName,
+    String profileImage,
+    String email,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 15,
+            backgroundColor: AppColors.fieryRed,
+            child: Icon(
+              Icons.person_outline,
+              color: AppColors.whiteShade,
+              size: 10,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                artistName,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.background,
                 ),
               ),
-            ),
-          ],
-        ),
+              Text(
+                email,
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w300,
+                  color: AppColors.fieryRed,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildItemRow() {
-    return ListView.builder(
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: <Widget>[
-            const SizedBox(height: 15),
-            _buildCartItemCard(
-              index,
-              products[index]['name'],
-              products[index]['quantity'],
-              products[index]['price'],
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildCartItemCard(
-    int index,
-    String name,
-    int quantity,
-    double price,
-  ) {
+  Widget _buildCartItemCard(Map<String, dynamic> product) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
@@ -125,14 +169,13 @@ class _CustomerCartState extends State<CustomerCart> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Checkbox(
               activeColor: AppColors.fieryRed,
-              value: isCheckedList[index],
+              value: isCheckedList[products.indexOf(product)],
               onChanged: (bool? value) {
                 setState(() {
-                  isCheckedList[index] = value!;
+                  isCheckedList[products.indexOf(product)] = value!;
                 });
               },
             ),
@@ -152,23 +195,20 @@ class _CustomerCartState extends State<CustomerCart> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: double.infinity, // Takes available space
-                    child: Text(
-                      name,
-                      maxLines: 2, // Allows wrapping to 2 lines
-                      softWrap: true, // Enables wrapping
-                      overflow: TextOverflow.ellipsis, // If text is too long
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.background,
-                      ),
+                  Text(
+                    product['name'],
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.background,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "Quantity: x$quantity",
+                    "Quantity: x${product['quantity']}",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -180,7 +220,7 @@ class _CustomerCartState extends State<CustomerCart> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₱ ${price.toString()}",
+                        "₱ ${product['price'].toString()}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -199,6 +239,94 @@ class _CustomerCartState extends State<CustomerCart> {
                     ],
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomAppBar() {
+    int selectedQuantity = isCheckedList.where((checked) => checked).length;
+    double totalPrice = 0.0;
+    for (int i = 0; i < isCheckedList.length; i++) {
+      if (isCheckedList[i]) {
+        totalPrice += products[i]['price'] * products[i]['quantity'];
+      }
+    }
+
+    return BottomAppBar(
+      color: AppColors.appBarBackground,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  activeColor: AppColors.fieryRed,
+                  value: isAllSelected,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isAllSelected = value!;
+                      isCheckedList = List<bool>.filled(products.length, value);
+                    });
+                  },
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                const Text(
+                  "All",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "Quantity  $selectedQuantity",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  "Total  ₱${totalPrice.toStringAsFixed(0)}",
+                  style: const TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 11.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+            TextButton(
+              onPressed: selectedQuantity > 0 ? () {} : null,
+              style: TextButton.styleFrom(
+                backgroundColor:
+                    selectedQuantity > 0 ? AppColors.fieryRed : Colors.grey,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 10.0,
+                ),
+              ),
+              child: const Text(
+                "Check out",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
