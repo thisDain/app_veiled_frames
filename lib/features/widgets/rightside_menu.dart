@@ -44,7 +44,7 @@ class _RightSideMenuState extends State<RightSideMenu>
 
   void _fetchUserData() async {
     setState(() {
-      isLoading = true; // Show loading indicator
+      isLoading = true;
     });
 
     Map<String, String?> sessionData = await authService.getUserSessionData();
@@ -64,7 +64,7 @@ class _RightSideMenuState extends State<RightSideMenu>
 
     if (response.success) {
       setState(() {
-        userData = response.data; // CustomerModel or EmployeeModel
+        userData = response.data;
         isLoading = false;
       });
     } else {
@@ -90,9 +90,9 @@ class _RightSideMenuState extends State<RightSideMenu>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pop(context), // Close menu when clicking outside
+      onTap: () => Navigator.pop(context),
       child: Material(
-        color: Colors.black54, // Semi-transparent background
+        color: Colors.black54,
         child: Align(
           alignment: Alignment.centerRight,
           child: SlideTransition(
@@ -114,9 +114,7 @@ class _RightSideMenuState extends State<RightSideMenu>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   isLoading
-                      ? Center(
-                        child: CircularProgressIndicator(),
-                      ) // Show loader
+                      ? Center(child: CircularProgressIndicator())
                       : ListTile(
                         leading: CircleAvatar(
                           radius: 25,
@@ -151,13 +149,8 @@ class _RightSideMenuState extends State<RightSideMenu>
                           ),
                         ),
                       ),
-
-                  // Other menu items
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ), // Add padding
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -168,18 +161,15 @@ class _RightSideMenuState extends State<RightSideMenu>
                         );
                       },
                       child: Container(
-                        width:
-                            double.infinity, // Make the button take full width
-                        height: 30, // Set a fixed height for the button
-                        decoration: BoxDecoration(
-                          color: AppColors.fieryRed, // Use your fieryRed color
-                        ),
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(color: AppColors.fieryRed),
                         child: Center(
                           child: Text(
                             "Edit Profile",
                             style: TextStyle(
-                              color: Colors.white, // Text color
-                              fontSize: 16, // Text size
+                              color: Colors.white,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -194,8 +184,7 @@ class _RightSideMenuState extends State<RightSideMenu>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Container(
-                      alignment:
-                          Alignment.center, // Center the Row horizontally
+                      alignment: Alignment.center,
 
                       child: GestureDetector(
                         onTap: () {
@@ -203,17 +192,10 @@ class _RightSideMenuState extends State<RightSideMenu>
                           handleLogout();
                         },
                         child: Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center, // Center the content inside the Row
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.logout,
-                              color: Colors.white,
-                            ), // Logout icon
-                            SizedBox(
-                              width: 8,
-                            ), // Add spacing between icon and text
+                            Icon(Icons.logout, color: Colors.white),
+                            SizedBox(width: 8),
                             Text(
                               "Logout",
                               style: TextStyle(color: Colors.white),
