@@ -308,7 +308,17 @@ class _CustomerCartState extends State<CustomerCart> {
               ],
             ),
             TextButton(
-              onPressed: selectedQuantity > 0 ? () {} : null,
+              onPressed:
+                  selectedQuantity > 0
+                      ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CustomerCheckout(),
+                          ),
+                        );
+                      }
+                      : null,
               style: TextButton.styleFrom(
                 backgroundColor:
                     selectedQuantity > 0 ? AppColors.fieryRed : Colors.grey,
