@@ -103,6 +103,50 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
               ),
             ],
           ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: <Widget>[
+                Text(
+                  "#",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: AppColors.dustyBlush,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                SizedBox(width: 40),
+                Text(
+                  "Name",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: AppColors.dustyBlush,
+                  ),
+                ),
+
+                SizedBox(width: 140),
+                Text(
+                  "Orders",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: AppColors.dustyBlush,
+                  ),
+                ),
+                SizedBox(width: 40),
+                Text(
+                  "Sales",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: AppColors.dustyBlush,
+                  ),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: 16),
 
           // Scrollable ListView inside a SizedBox
