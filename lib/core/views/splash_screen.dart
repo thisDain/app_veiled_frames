@@ -42,19 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset(
                 "assets/images/logo_main.png",
-                width: 156,
-                height: 156,
+                width: 200,
+                height: 200,
               ),
               const SizedBox(height: 20),
-              const Text(
-                "VEILED FRAMES",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFFFFFFE4),
-                  fontFamily: "Lisu Bosa",
-                ),
-              ),
             ],
           ),
         ),

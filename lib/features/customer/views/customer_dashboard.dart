@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/customer/views/customer_artistprofile.dart';
 import 'package:veiled_frames/features/customer/views/customer_cart.dart';
+import 'package:veiled_frames/features/customer/views/customer_categories.dart';
 import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
 import 'package:veiled_frames/features/widgets/global_appbar.dart';
 import 'package:veiled_frames/features/widgets/rightside_menu.dart';
@@ -281,7 +282,12 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
 
   Widget _buildCategoryCard(String imagePath, String text) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CustomerCategoriesSection()),
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Container(
@@ -644,7 +650,14 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     Align(
                       alignment: Alignment.center,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomerArtistprofile(),
+                            ),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: AppColors.whiteShade,
                           side: const BorderSide(
