@@ -6,7 +6,6 @@ import 'package:veiled_frames/core/enums/user_role.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/signup.dart';
 import 'package:veiled_frames/features/customer/views/customer_dashboard.dart';
-import 'package:veiled_frames/features/employee/views/employee_dashboard.dart';
 import 'package:veiled_frames/features/employee/views/employee_main.dart';
 
 class Login extends StatefulWidget {
@@ -321,6 +320,30 @@ class _LoginState extends State<Login> {
                 selectedRole = value!;
               });
             },
+          ),
+          SizedBox(height: 12.0),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                print('Forgot Password Pressed');
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero, // Removes padding
+                minimumSize: Size(0, 0), // Ensures no extra space
+                tapTargetSize:
+                    MaterialTapTargetSize.shrinkWrap, // Shrinks tap area
+              ),
+              child: Text(
+                'Forgot Password',
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 11.0,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.secondary,
+                ),
+              ),
+            ),
           ),
           SizedBox(height: 12.0),
           SizedBox(

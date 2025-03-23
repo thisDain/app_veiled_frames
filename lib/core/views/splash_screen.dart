@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:veiled_frames/features/auth/views/auth_wrapper.dart';
 
 class SplashScreen extends StatefulWidget {

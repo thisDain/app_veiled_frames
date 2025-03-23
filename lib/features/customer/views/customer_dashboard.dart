@@ -5,7 +5,6 @@ import 'package:veiled_frames/features/customer/views/customer_cart.dart';
 import 'package:veiled_frames/features/customer/views/customer_categories.dart';
 import 'package:veiled_frames/features/customer/views/customer_productdetails.dart';
 import 'package:veiled_frames/features/widgets/global_appbar.dart';
-import 'package:veiled_frames/features/widgets/rightside_menu.dart';
 
 class CustomerDashboard extends StatefulWidget {
   const CustomerDashboard({super.key});

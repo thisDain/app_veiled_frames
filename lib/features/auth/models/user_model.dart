@@ -15,7 +15,7 @@ class UserModel {
   final String? postalCode;
   final String? image;
   final UserRole role;
-  final DateTime createdAt; //c_created_at or e_hiredate
+  final DateTime createdAt; //Can be c_created_at or e_hiredate
 
   UserModel({
     this.id,

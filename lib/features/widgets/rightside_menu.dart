@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
-import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/models/user_model.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
 import 'package:veiled_frames/features/widgets/user_edit_profile.dart';
-
-import '../../core/utils/api_response.dart';
 
 class RightSideMenu extends StatefulWidget {
   const RightSideMenu({super.key});
@@ -44,7 +41,7 @@ class _RightSideMenuState extends State<RightSideMenu>
 
   void _fetchUserData() async {
     setState(() {
-      isLoading = true;
+      isLoading = true; // Show loading indicator
     });
 
     Map<String, String?> sessionData = await authService.getUserSessionData();
@@ -64,7 +61,7 @@ class _RightSideMenuState extends State<RightSideMenu>
 
     if (response.success) {
       setState(() {
-        userData = response.data;
+        userData = response.data; // CustomerModel or EmployeeModel
         isLoading = false;
       });
     } else {
@@ -90,9 +87,9 @@ class _RightSideMenuState extends State<RightSideMenu>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
+      onTap: () => Navigator.pop(context), // Close menu when clicking outside
       child: Material(
-        color: Colors.black54,
+        color: Colors.black54, // Semi-transparent background
         child: Align(
           alignment: Alignment.centerRight,
           child: SlideTransition(
@@ -114,7 +111,9 @@ class _RightSideMenuState extends State<RightSideMenu>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   isLoading
-                      ? Center(child: CircularProgressIndicator())
+                      ? Center(
+                        child: CircularProgressIndicator(),
+                      ) // Show loader
                       : ListTile(
                         leading: CircleAvatar(
                           radius: 25,
@@ -149,8 +148,13 @@ class _RightSideMenuState extends State<RightSideMenu>
                           ),
                         ),
                       ),
+
+                  // Other menu items
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ), // Add padding
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -161,15 +165,18 @@ class _RightSideMenuState extends State<RightSideMenu>
                         );
                       },
                       child: Container(
-                        width: double.infinity,
-                        height: 30,
-                        decoration: BoxDecoration(color: AppColors.fieryRed),
+                        width:
+                            double.infinity, // Make the button take full width
+                        height: 30, // Set a fixed height for the button
+                        decoration: BoxDecoration(
+                          color: AppColors.fieryRed, // Use your fieryRed color
+                        ),
                         child: Center(
                           child: Text(
                             "Edit Profile",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                              color: Colors.white, // Text color
+                              fontSize: 16, // Text size
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -184,7 +191,8 @@ class _RightSideMenuState extends State<RightSideMenu>
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Container(
-                      alignment: Alignment.center,
+                      alignment:
+                          Alignment.center, // Center the Row horizontally
 
                       child: GestureDetector(
                         onTap: () {
@@ -192,10 +200,17 @@ class _RightSideMenuState extends State<RightSideMenu>
                           handleLogout();
                         },
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .center, // Center the content inside the Row
                           children: [
-                            Icon(Icons.logout, color: Colors.white),
-                            SizedBox(width: 8),
+                            Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ), // Logout icon
+                            SizedBox(
+                              width: 8,
+                            ), // Add spacing between icon and text
                             Text(
                               "Logout",
                               style: TextStyle(color: Colors.white),

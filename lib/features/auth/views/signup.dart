@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/core/enums/user_role.dart';
-import 'package:veiled_frames/core/utils/logger.dart';
 import 'package:veiled_frames/features/auth/data/auth_service.dart';
 import 'package:veiled_frames/features/auth/views/login.dart';
 

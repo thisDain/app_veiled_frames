@@ -13,4 +13,5 @@ class AppColors {
   static const Color rosewoodMauve = Color(0xFFD5B5B8);
   static const Color dustyBlush = Color(0xFFAA6377);
   static const Color crimsonWine = Color(0xFF801336);
+  static const Color gunMetalGray = Color(0xFF232B2B);
 }

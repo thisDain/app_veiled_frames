@@ -13,34 +13,32 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
   String revenueChange = '0%';
   int totalOrders = 0;
   int totalProducts = 0;
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController =
+      ScrollController(); // Create controller
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Dashboard',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFFEE4540),
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Dashboard',
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFFEE4540),
               ),
-              SizedBox(height: 16),
-              _revenueCard(totalRevenue, revenueChange),
-              SizedBox(height: 16),
-              _ordersAndProductsRow(totalOrders, totalProducts),
-              SizedBox(height: 16),
-              _bestSellingProductsCard(),
-            ],
-          ),
+            ),
+            SizedBox(height: 16),
+            _revenueCard(totalRevenue, revenueChange),
+            SizedBox(height: 16),
+            _ordersAndProductsRow(totalOrders, totalProducts),
+            SizedBox(height: 16),
+            Expanded(child: _bestSellingProductsCard()),
+          ],
         ),
       ),
     );
@@ -48,11 +46,10 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
 
   Widget _revenueCard(String totalRevenue, String revenueChange) {
     return Container(
-      height: 150,
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.plumRed,
-        borderRadius: BorderRadius.circular(20),
+        color: Color(0xFF801336),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +59,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
               Text(
                 '₱',
                 style: TextStyle(
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                   fontSize: 36,
                   color: Color(0xFFEE4540),
                 ),
@@ -70,9 +67,9 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
               Text(
                 totalRevenue,
                 style: TextStyle(
-                  fontSize: 64,
+                  fontSize: 50,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.whiteShade,
+                  color: Color(0xFFFAFAF0),
                 ),
               ),
             ],
@@ -83,7 +80,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
               Text(
                 'Total Revenue',
                 style: TextStyle(
-                  color: AppColors.whiteShade,
+                  color: Color(0xFFFAFAF0),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -99,18 +96,14 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
     return Row(
       children: [
         Expanded(
-          child: _infoCard(
-            'Total Orders',
-            '$totalOrders',
-            Icons.shopping_cart_outlined,
-          ),
+          child: _infoCard('Total Orders', '$totalOrders', Icons.shopping_cart),
         ),
         SizedBox(width: 16),
         Expanded(
           child: _infoCard(
             'Total Products',
             '$totalProducts',
-            Icons.shopping_bag_outlined,
+            Icons.inventory_2,
           ),
         ),
       ],
@@ -121,8 +114,8 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.whiteShade,
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -145,9 +138,9 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
             child: Text(
               value,
               style: TextStyle(
-                fontSize: 64,
-                fontWeight: FontWeight.w500,
-                color: AppColors.plumRed,
+                fontSize: 80,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF801336),
               ),
             ),
           ),
@@ -162,6 +155,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
   }
 
   Widget _bestSellingProductsCard() {
+    // Example data for the product rows
     final List<Map<String, String>> products = [
       {'name': 'The Sunflower', 'orders': '17', 'sales': '15'},
       {'name': 'The Rose', 'orders': '12', 'sales': '10'},
@@ -171,13 +165,20 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
       {'name': 'The Orchid', 'orders': '4', 'sales': '3'},
       {'name': 'The Carnation', 'orders': '3', 'sales': '2'},
       {'name': 'The Iris', 'orders': '2', 'sales': '1'},
+      {'name': 'The Peony', 'orders': '1', 'sales': '1'},
+      {'name': 'The Hydrangea', 'orders': '1', 'sales': '1'},
+      {'name': 'The Lavender', 'orders': '1', 'sales': '1'},
+      {'name': 'The Marigold', 'orders': '1', 'sales': '1'},
+      {'name': 'The Poppy', 'orders': '1', 'sales': '1'},
+      {'name': 'The Snapdragon', 'orders': '1', 'sales': '1'},
+      {'name': 'The Zinnia', 'orders': '1', 'sales': '1'},
     ];
 
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.whiteShade,
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -191,6 +192,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(Icons.star_border, color: Color(0xFFEE4540)),
               SizedBox(width: 8),
@@ -203,14 +205,17 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF801336),
+                      fontFamily: 'Poppins',
                     ),
                   ),
+                  SizedBox(height: 1),
                   Text(
                     'Month - (March)',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: Color(0xFFE09398),
+                      fontFamily: 'Poppins',
                       fontStyle: FontStyle.italic,
                     ),
                   ),
@@ -218,127 +223,182 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
               ),
             ],
           ),
-          SizedBox(height: 5),
-          Row(
-            children: [
-              SizedBox(width: 8),
-              Text(
-                '#',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.plumRed.withOpacity(0.5),
+          SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    '#',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFD4606D),
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
                 ),
-              ),
-              SizedBox(width: 40),
-              Text(
-                'Name',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: AppColors.plumRed.withOpacity(0.5),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    'Name',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFD4606D),
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
                 ),
-              ),
-              SizedBox(width: 120),
-              Text(
-                'Orders',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: AppColors.plumRed.withOpacity(0.5),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Orders',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFD4606D),
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              SizedBox(width: 50),
-              Text(
-                'Sales',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: AppColors.plumRed.withOpacity(0.5),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Sales',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFD4606D),
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          SizedBox(height: 10),
-
-          SizedBox(
-            height: 300,
-            child: Scrollbar(
-              thickness: 8,
-              radius: const Radius.circular(10),
-              thumbVisibility: true,
-              controller: _scrollController,
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 8, right: 30),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF2D142C),
-                      borderRadius: BorderRadius.horizontal(
-                        right: Radius.circular(10),
-                        left: Radius.circular(10),
+          SizedBox(height: 8),
+          // Use ListView for the product rows
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      width: 12, // Width of the scrollbar background
+                      decoration: BoxDecoration(
+                        color:
+                            AppColors.rosewoodMauve, // Track background color
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ), // Adjust for rounded edges
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 8.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              '${index + 1}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFC0B8AD),
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Text(
-                              product['name']!,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.whiteShade,
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              product['orders']!,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFEE4540),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              product['sales']!,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFEE4540),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                  ),
+                ),
+                Scrollbar(
+                  thickness: 8, // Scrollbar thickness
+                  radius: const Radius.circular(10), // Rounded corners
+                  thumbVisibility: true, // Always visible
+                  interactive: true, // Draggable
+                  trackVisibility: true,
+                  scrollbarOrientation: ScrollbarOrientation.right,
+                  controller: _scrollController,
+                  child: Theme(
+                    data: ThemeData(
+                      scrollbarTheme: ScrollbarThemeData(
+                        thumbColor: WidgetStateProperty.all(
+                          AppColors.dustyBlush,
+                        ), // Change color here
+                        trackColor: WidgetStateProperty.all(
+                          AppColors.dustyBlush,
+                        ), // Track color
+                        trackVisibility: WidgetStateProperty.all(true),
                       ),
                     ),
-                  );
-                },
-              ),
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 8, right: 30),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF2D142C),
+                            borderRadius: BorderRadius.horizontal(
+                              right: Radius.circular(10),
+                              left: Radius.circular(10),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 8.0,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFC0B8AD),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    product['name']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFFAFAF0),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    product['orders']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFEE4540),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    product['sales']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFFEE4540),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
