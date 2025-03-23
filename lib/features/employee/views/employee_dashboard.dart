@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
+import 'package:veiled_frames/core/constants/products.dart';
 
 class ArtistDashboard extends StatefulWidget {
   const ArtistDashboard({super.key});
@@ -249,7 +250,7 @@ class _ArtistDashboardState extends State<ArtistDashboard> {
           Row(
             children: [
               Text(
-                '₱',
+                pesoSign,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 36,

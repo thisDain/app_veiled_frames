@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
+import 'package:veiled_frames/core/constants/products.dart';
 import 'package:veiled_frames/features/customer/views/customer_checkout.dart';
 
 class CustomerCart extends StatefulWidget {
@@ -220,7 +221,7 @@ class _CustomerCartState extends State<CustomerCart> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₱ ${product['price'].toString()}",
+                        "$pesoSign ${product['price'].toString()}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -298,7 +299,7 @@ class _CustomerCartState extends State<CustomerCart> {
                   ),
                 ),
                 Text(
-                  "Total  ₱${totalPrice.toStringAsFixed(0)}",
+                  "Total $pesoSign ${totalPrice.toStringAsFixed(0)}",
                   style: const TextStyle(
                     color: Colors.redAccent,
                     fontSize: 11.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
+import 'package:veiled_frames/core/constants/products.dart';
 
 class CustomerCheckout extends StatefulWidget {
   const CustomerCheckout({super.key});
@@ -45,6 +46,7 @@ class _CustomerCheckoutState extends State<CustomerCheckout> {
 
   String selectedDeliveryMode = "STANDARD DELIVERY";
   String selectedPaymentMode = "CREDIT CARD";
+  // Unicode for ₱
 
   @override
   Widget build(BuildContext context) {
@@ -73,32 +75,29 @@ class _CustomerCheckoutState extends State<CustomerCheckout> {
       bottomNavigationBar: BottomAppBar(
         color: AppColors.appBarBackground,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.fieryRed,
-                  side: const BorderSide(color: AppColors.fieryRed, width: 1.5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 175.0,
-                    vertical: 20.0,
-                  ),
-                  minimumSize: const Size(0, 0),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                backgroundColor: AppColors.fieryRed,
+                side: const BorderSide(color: AppColors.fieryRed, width: 1.5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Text(
-                  "Check out",
-                  style: TextStyle(
-                    color: AppColors.whiteShade,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Poppins",
-                  ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 175.0,
+                  vertical: 20.0,
+                ),
+                minimumSize: const Size(0, 0),
+              ),
+              child: const Text(
+                "Check out",
+                style: TextStyle(
+                  color: AppColors.whiteShade,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Poppins",
                 ),
               ),
             ),
@@ -491,7 +490,7 @@ class _CustomerCheckoutState extends State<CustomerCheckout> {
                   ),
                   detailRow(
                     label: "Price",
-                    value: "₱${totalPrice.toStringAsFixed(2)}",
+                    value: "$pesoSign ${totalPrice.toStringAsFixed(2)}",
                     isSummary: true,
                   ),
                   detailRow(
@@ -547,7 +546,7 @@ class _CustomerCheckoutState extends State<CustomerCheckout> {
               alignment:
                   isSummary ? Alignment.centerRight : Alignment.centerLeft,
               child: Text(
-                isPrice ? "₱${value.toString()}" : value.toString(),
+                isPrice ? "$pesoSign ${value.toString()}" : value.toString(),
                 style: TextStyle(
                   fontSize: isPrice ? 13 : 9,
                   fontWeight: isPrice ? FontWeight.bold : FontWeight.w400,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
+import 'package:veiled_frames/core/constants/products.dart';
 import 'package:veiled_frames/features/customer/views/customer_artistprofile.dart';
 import 'package:veiled_frames/features/customer/views/customer_cart.dart';
 import 'package:veiled_frames/features/customer/views/customer_categories.dart';
@@ -492,7 +493,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                     ),
                     SizedBox(height: 4.0),
                     Text(
-                      "₱${price.toStringAsFixed(2)}",
+                      "$pesoSign ${price.toStringAsFixed(2)}",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: "Poppins",

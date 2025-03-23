@@ -151,3 +151,5 @@ final List<Map<String, dynamic>> products = [
     'prod_sold': 2,
   },
 ];
+
+final String pesoSign = '\u20B1';

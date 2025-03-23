@@ -110,192 +110,170 @@ class _ArtistOrdersState extends State<ArtistOrders> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      width: 12,
-                      decoration: BoxDecoration(
-                        color: AppColors.rosewoodMauve,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
+            child: Scrollbar(
+              thickness: 8,
+              radius: const Radius.circular(10),
+              thumbVisibility: true, // Always visible
+              interactive: true, // Draggable
+              trackVisibility: true,
+              scrollbarOrientation: ScrollbarOrientation.right,
+              controller: _scrollController,
+              child: Theme(
+                data: ThemeData(
+                  scrollbarTheme: ScrollbarThemeData(
+                    thumbColor: WidgetStateProperty.all(AppColors.dustyBlush),
+                    trackColor: WidgetStateProperty.all(AppColors.dustyBlush),
+                    trackVisibility: WidgetStateProperty.all(true),
                   ),
                 ),
-                Scrollbar(
-                  thickness: 8,
-                  radius: const Radius.circular(10),
-                  thumbVisibility: true, // Always visible
-                  interactive: true, // Draggable
-                  trackVisibility: true,
-                  scrollbarOrientation: ScrollbarOrientation.right,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
                   controller: _scrollController,
-                  child: Theme(
-                    data: ThemeData(
-                      scrollbarTheme: ScrollbarThemeData(
-                        thumbColor: WidgetStateProperty.all(
-                          AppColors.dustyBlush,
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    final order = orders[index];
+                    return Container(
+                      height: 100,
+                      width: double.infinity,
+                      margin: EdgeInsets.only(bottom: 8, right: 30),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2D142C),
+                        borderRadius: BorderRadius.horizontal(
+                          right: Radius.circular(10),
+                          left: Radius.circular(10),
                         ),
-                        trackColor: WidgetStateProperty.all(
-                          AppColors.dustyBlush,
-                        ),
-                        trackVisibility: WidgetStateProperty.all(true),
                       ),
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      controller: _scrollController,
-                      itemCount: orders.length,
-                      itemBuilder: (context, index) {
-                        final order = orders[index];
-                        return Container(
-                          height: 100,
-                          margin: EdgeInsets.only(bottom: 8, right: 30),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF2D142C),
-                            borderRadius: BorderRadius.horizontal(
-                              right: Radius.circular(10),
-                              left: Radius.circular(10),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 10,
-                            ),
-                            child: Column(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        "Order No.: ${order['order_no']}",
-                                        style: TextStyle(
-                                          color: AppColors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                Flexible(
+                                  child: Text(
+                                    "Order No.: ${order['order_no']}",
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                    Spacer(),
-                                    SizedBox(
-                                      width: 70,
-                                      height: 20,
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) => OrderDetails(),
-                                            ),
-                                          );
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all(
-                                                AppColors.secondary,
-                                              ),
-                                          shape: WidgetStateProperty.all(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(3),
-                                            ),
-                                          ),
-                                          padding: WidgetStateProperty.all(
-                                            EdgeInsets.symmetric(
-                                              vertical: 3,
-                                              horizontal: 2,
-                                            ),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          "View Details",
-                                          style: TextStyle(
-                                            color: AppColors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                                Divider(color: AppColors.crimsonWine),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          IconText(
-                                            icon: Icons.person,
-                                            text: order['customer_name'],
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
+                                Spacer(),
+                                SizedBox(
+                                  width: 70,
+                                  height: 20,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => OrderDetails(),
+                                        ),
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: WidgetStateProperty.all(
+                                        AppColors.secondary,
+                                      ),
+                                      shape: WidgetStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            3,
                                           ),
-                                          IconText(
-                                            icon: Icons.attach_money,
-                                            text:
-                                                "Payable: ${order['payable']}",
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          IconText(
-                                            icon: Icons.calendar_month,
-                                            text:
-                                                "Order on: ${order['order_date']}",
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
+                                        ),
+                                      ),
+                                      padding: WidgetStateProperty.all(
+                                        EdgeInsets.symmetric(
+                                          vertical: 3,
+                                          horizontal: 2,
+                                        ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          IconText(
-                                            icon: Icons.phone,
-                                            text: order['contact'],
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          IconText(
-                                            icon: Icons.location_pin,
-                                            text: order['location'],
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          IconText(
-                                            icon: Icons.delivery_dining,
-                                            text: order['delivery_type'],
-                                            size: 10,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
+                                    child: Text(
+                                      "View Details",
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                            Divider(color: AppColors.crimsonWine),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      IconText(
+                                        icon: Icons.person,
+                                        text: order['customer_name'],
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      IconText(
+                                        icon: Icons.attach_money,
+                                        text: "Payable: ${order['payable']}",
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      IconText(
+                                        icon: Icons.calendar_month,
+                                        text:
+                                            "Order on: ${order['order_date']}",
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      IconText(
+                                        icon: Icons.phone,
+                                        text: order['contact'],
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      IconText(
+                                        icon: Icons.location_pin,
+                                        text: order['location'],
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      IconText(
+                                        icon: Icons.delivery_dining,
+                                        text: order['delivery_type'],
+                                        size: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ],
+              ),
             ),
           ),
         ],

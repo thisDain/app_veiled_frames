@@ -65,7 +65,7 @@ class _LoginState extends State<Login> {
               MaterialPageRoute(builder: (context) => CustomerDashboard()),
             );
           } else {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => ArtistMain()),
             );
