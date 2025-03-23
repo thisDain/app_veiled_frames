@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/core/constants/products.dart';
+import 'package:veiled_frames/features/employee/views/employee_addproduct.dart';
+import 'package:veiled_frames/features/employee/views/employee_editproduct.dart';
 
 class ArtistProducts extends StatefulWidget {
   const ArtistProducts({super.key});
@@ -10,12 +12,11 @@ class ArtistProducts extends StatefulWidget {
 }
 
 class _ArtistProductsState extends State<ArtistProducts> {
-  final ScrollController _scrollController =
-      ScrollController(); // Create controller
-
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -33,23 +34,21 @@ class _ArtistProductsState extends State<ArtistProducts> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add,
-                    color: AppColors.fieryRed,
-                  ), // Change icon color if needed
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddProduct()),
+                    );
+                  },
+                  icon: const Icon(Icons.add, color: AppColors.fieryRed),
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(
                       AppColors.background,
-                    ), // Set background color
-                    minimumSize: WidgetStateProperty.all(
-                      const Size(48, 48),
-                    ), // Make it square
+                    ),
+                    minimumSize: WidgetStateProperty.all(const Size(48, 48)),
                     shape: WidgetStateProperty.all(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ), // Rounded square
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
@@ -89,20 +88,17 @@ class _ArtistProductsState extends State<ArtistProducts> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      width: 12, // Width of the scrollbar background
+                      width: 12,
                       decoration: BoxDecoration(
-                        color:
-                            AppColors.rosewoodMauve, // Track background color
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ), // Adjust for rounded edges
+                        color: AppColors.rosewoodMauve,
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     ),
                   ),
                 ),
                 Scrollbar(
-                  thickness: 8, // Scrollbar thickness
-                  radius: const Radius.circular(10), // Rounded corners
+                  thickness: 8,
+                  radius: const Radius.circular(10),
                   thumbVisibility: true, // Always visible
                   interactive: true, // Draggable
                   trackVisibility: true,
@@ -113,10 +109,10 @@ class _ArtistProductsState extends State<ArtistProducts> {
                       scrollbarTheme: ScrollbarThemeData(
                         thumbColor: WidgetStateProperty.all(
                           AppColors.dustyBlush,
-                        ), // Change color here
+                        ),
                         trackColor: WidgetStateProperty.all(
                           AppColors.dustyBlush,
-                        ), // Track color
+                        ),
                         trackVisibility: WidgetStateProperty.all(true),
                       ),
                     ),
@@ -183,8 +179,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                           TextSpan(
                                             text: "${product['product_id']!}",
                                             style: TextStyle(
-                                              color:
-                                                  AppColors.white, // No opacity
+                                              color: AppColors.white,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis,
@@ -209,8 +204,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                           TextSpan(
                                             text: "${product['prod_medium']!}",
                                             style: TextStyle(
-                                              color:
-                                                  AppColors.white, // No opacity
+                                              color: AppColors.white,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis,
@@ -236,8 +230,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                             text:
                                                 "${product['prod_dimensions']!}",
                                             style: TextStyle(
-                                              color:
-                                                  AppColors.white, // No opacity
+                                              color: AppColors.white,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis,
@@ -263,8 +256,7 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                             text:
                                                 "${product['prod_stock_quantity']!}",
                                             style: TextStyle(
-                                              color:
-                                                  AppColors.white, // No opacity
+                                              color: AppColors.white,
                                               fontWeight: FontWeight.w400,
                                               fontSize: 10,
                                               overflow: TextOverflow.ellipsis,
@@ -280,7 +272,16 @@ class _ArtistProductsState extends State<ArtistProducts> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     IconButton(
-                                      onPressed: () => {},
+                                      onPressed:
+                                          () => {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => EditProduct(),
+                                              ),
+                                            ),
+                                          },
                                       icon: Icon(
                                         Icons.edit_square,
                                         color: AppColors.fieryRed,

@@ -31,6 +31,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -173,8 +174,9 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                             child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // Use Flexible to prevent overflow
                                     Flexible(
                                       child: Text(
                                         "Order No.: ${order['order_no']}",
@@ -183,9 +185,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
-                                        overflow:
-                                            TextOverflow
-                                                .ellipsis, // Prevent text overflow
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                     Spacer(),

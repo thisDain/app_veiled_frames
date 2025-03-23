@@ -26,7 +26,7 @@ class IconText extends StatelessWidget {
           text,
           style: TextStyle(
             color: color,
-            fontSize: size * 0.8, // Adjust font size relative to icon size
+            fontSize: size * 0.8,
             overflow: TextOverflow.ellipsis,
           ),
         ),

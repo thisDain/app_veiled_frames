@@ -323,30 +323,6 @@ class _LoginState extends State<Login> {
             },
           ),
           SizedBox(height: 12.0),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                print('Forgot Password Pressed');
-              },
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero, // Removes padding
-                minimumSize: Size(0, 0), // Ensures no extra space
-                tapTargetSize:
-                    MaterialTapTargetSize.shrinkWrap, // Shrinks tap area
-              ),
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 11.0,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.secondary,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 12.0),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(

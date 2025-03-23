@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/features/employee/views/employee_dashboard.dart';
 import 'package:veiled_frames/features/employee/views/employee_orders.dart';
 import 'package:veiled_frames/features/employee/views/employee_products.dart';
@@ -12,18 +13,17 @@ class ArtistMain extends StatefulWidget {
 }
 
 class _ArtistMainState extends State<ArtistMain> {
-  int _selectedIndex = 0; // Default index for the dashboard
+  int _selectedIndex = 0;
 
-  // List of screens to display based on the selected index
   final List<Widget> _screens = [
-    ArtistDashboard(), // Index 0: Dashboard
-    ArtistProducts(), // Index 1: Products
-    ArtistOrders(), // Index 2: Orders
+    ArtistDashboard(),
+    ArtistProducts(),
+    ArtistOrders(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Update the selected index
+      _selectedIndex = index;
     });
   }
 
@@ -31,23 +31,27 @@ class _ArtistMainState extends State<ArtistMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppbar(),
-      body: _screens[_selectedIndex], // Display the selected screen
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.whiteShade,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.inventory),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
             label: 'Products',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.shopping_bag_outlined),
             label: 'Orders',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color(0xFFEE4540),
         unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped, // Handle item taps
+        onTap: _onItemTapped,
       ),
     );
   }
