@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:veiled_frames/core/constants/app_colors.dart';
 import 'package:veiled_frames/core/constants/orders.dart';
+import 'package:veiled_frames/features/employee/views/employee_orderdetails.dart';
 import 'package:veiled_frames/features/widgets/icon_text.dart';
 
 class ArtistOrders extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
   @override
   void initState() {
     super.initState();
-    selectedStatus = statusOptions.first; // Set default status
+    selectedStatus = statusOptions.first;
   }
 
   @override
@@ -53,10 +54,8 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                   height: 38,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    color: AppColors.secondary, // Background color
-                    borderRadius: BorderRadius.circular(
-                      10,
-                    ), // Rounded square shape
+                    color: AppColors.secondary,
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -65,9 +64,8 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                         Icons.arrow_drop_down,
                         color: Colors.white,
                       ),
-                      dropdownColor:
-                          AppColors.secondary, // Dropdown background color
-                      style: const TextStyle(color: Colors.white), // Text color
+                      dropdownColor: AppColors.secondary,
+                      style: const TextStyle(color: Colors.white),
                       onChanged: (String? newValue) {
                         if (newValue != null) {
                           setState(() => selectedStatus = newValue);
@@ -118,20 +116,17 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      width: 12, // Width of the scrollbar background
+                      width: 12,
                       decoration: BoxDecoration(
-                        color:
-                            AppColors.rosewoodMauve, // Track background color
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ), // Adjust for rounded edges
+                        color: AppColors.rosewoodMauve,
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     ),
                   ),
                 ),
                 Scrollbar(
-                  thickness: 8, // Scrollbar thickness
-                  radius: const Radius.circular(10), // Rounded corners
+                  thickness: 8,
+                  radius: const Radius.circular(10),
                   thumbVisibility: true, // Always visible
                   interactive: true, // Draggable
                   trackVisibility: true,
@@ -142,10 +137,10 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                       scrollbarTheme: ScrollbarThemeData(
                         thumbColor: WidgetStateProperty.all(
                           AppColors.dustyBlush,
-                        ), // Change color here
+                        ),
                         trackColor: WidgetStateProperty.all(
                           AppColors.dustyBlush,
-                        ), // Track color
+                        ),
                         trackVisibility: WidgetStateProperty.all(true),
                       ),
                     ),
@@ -193,7 +188,15 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                       width: 70,
                                       height: 20,
                                       child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => OrderDetails(),
+                                            ),
+                                          );
+                                        },
                                         style: ButtonStyle(
                                           backgroundColor:
                                               WidgetStateProperty.all(
@@ -228,7 +231,6 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // First column
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -257,7 +259,6 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                         ],
                                       ),
                                     ),
-                                    // Second column
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -273,9 +274,7 @@ class _ArtistOrdersState extends State<ArtistOrders> {
                                             icon: Icons.location_pin,
                                             text: order['location'],
                                             size: 10,
-                                            overflow:
-                                                TextOverflow
-                                                    .ellipsis, // Prevents text overflow
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           IconText(
                                             icon: Icons.delivery_dining,
