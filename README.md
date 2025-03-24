@@ -16,7 +16,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## User Manual
-###1. How to Create an Account & Log In
+### 1. How to Create an Account & Log In
 [1] Log In
 - Open the Veiled Frames app.
 - Enter your registered email and password.
@@ -30,7 +30,7 @@ samples, guidance on mobile development, and a full API reference.
 - Pick whether to create a Customer or Artist account.
 - Tap "Create Account" to complete the registration.
 
-###2. Customer Section
+### 2. Customer Section
 [1] Dashboard
 - View featured artworks, top artists, recommended, or categories.
 - Browse different categories from the top horizontal scroll.
@@ -50,7 +50,7 @@ samples, guidance on mobile development, and a full API reference.
 - Tap "Edit Profile" and update your name, bio, or profile picture.
 - Save changes to update your account details.
 
-###4. Artist Section
+### 4. Artist Section
 [1] Dashboard
 - View total sales, recent orders, and product performance.
 - Get insights on customer engagement.
