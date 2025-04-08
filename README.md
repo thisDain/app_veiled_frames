@@ -1,19 +1,8 @@
-# veiled_frames
+# Veiled Frames
 
-A new Flutter project.
+In partial fulfillment of the requirements for the Finals Exam in Applications Development and Emerging Technologies (6ADET)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Veiled Frames is a mobile digital selling platform that helps traditional artists in the Philippines showcase and sell their artworks nationwide. It serves as a marketplace for various traditional art forms, offering a seamless and user-friendly shopping experience for both artists and buyers. It used Flutter Version 3.29.2 and Supabase (a cloud storage) for the database of the application. However, the authentication part of the application is directly connected to it. 
 
 ## User Manual
 ### 1. How to Create an Account & Log In
